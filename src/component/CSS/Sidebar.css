@@ -3,6 +3,8 @@
     min-width: 256px;
     height: 100vh;
     margin-right: 5px;
+    border-right: 1px solid #eee;
+    padding-right: 5px;
 }
 
 hr{

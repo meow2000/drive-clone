@@ -10,6 +10,7 @@ const FilesView = () => {
     return (
         <div className='fileView'>
             <div className="fileView__row">
+                logo của file và thông tin chi tiết
                 {/* {
                     files.slice(0, 5).map(({ id, item }) => (
                         <FileCard name={item.caption} />
@@ -27,9 +28,10 @@ const FilesView = () => {
                 </div>
             </div>
             {
-                files.map(({ id, item }) => (
-                    <FileItem id={id} caption={item.caption} timestamp={item.timestamp} fileUrl={item.fileUrl} size={item.size} />
-                ))
+                <FileItem/>
+                // files.map(({ id, item }) => (
+                //     <FileItem id="meow" caption="test" timestamp="hôm qua" fileUrl={item.fileUrl} size="nhiều" />
+                // ))
             }
         </div>
     )
