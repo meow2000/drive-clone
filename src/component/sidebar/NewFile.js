@@ -1,16 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../CSS/NewFile.css'
 import ApiService from '../FileHandler/ApiService';
 
 const NewFile = () => {
     // handle upload file
+    const [file, setFile] = useState(null);
     const onFileChangeHandler = (e) => {
         e.preventDefault();
-        this.setState({
-            selectedFile: e.target.files[0]
-        });
+        debugger
+        if(e.target.files[0]) {
+            setFile(e.target.files[0]);
+        }
         const formData = new FormData();
-        formData.append('file', this.state.selectedFile);
+        formData.append('file', file);
+        debugger
         ApiService.upload(formData)
             .then(res => {
                     console.log(res.data);

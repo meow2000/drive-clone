@@ -2,12 +2,13 @@
     display: flex;
     padding: 10px 0;
     /* border-radius: 0 100px 100px 0; */
-    width: 200px;
+    /* width: 200px; */
     cursor: pointer;
 }
 
 .sideBar__itemContainer:hover{
     background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 32px;
 }
 
 .sidebar__arrow{
