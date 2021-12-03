@@ -3,8 +3,13 @@
     border-bottom: 1px solid rgb(219, 219, 219);
     border-top: 1px solid rgb(219, 219, 219);
     width: 100%;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
+.fileItem:hover {
+    background-color: #eee;
+}
 .fileItem>a{
     height: 100%;
     display: flex;
