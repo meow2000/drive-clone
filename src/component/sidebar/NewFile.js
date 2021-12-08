@@ -29,8 +29,9 @@ const NewFile = () => {
         <div className="newFile">
             <div className="newFile__container" onClick={onClickHandler}>
                 {/* Plus */}
-                <p></p>
-                <input type="file" className="form-control" name="file" onChange={onFileChangeHandler}/>
+                <div className="AddIcon"></div>
+                <p className="AddIcon__text">Mới</p>
+                {/* <input type="file" className="form-control" name="file" onChange={onFileChangeHandler}/> */}
             </div>
         </div>
     )

@@ -7,7 +7,8 @@
 
 .newFile__container {
     display: flex;
-    justify-content: center;
+    width: 100px;
+    justify-content: start;
     align-items: center;
     /* TRouBLe */
     padding: 6px 32px 6px 8px;
@@ -16,6 +17,33 @@
     cursor: pointer;
 }
 
-.newFile__container>p{
-    margin-left: 14px;
+
+.AddIcon {
+    content: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22 viewBox=%220 0 36 36%22%3E%3Cpath fill=%22%2334A853%22 d=%22M16 16v14h4V20z%22/%3E%3Cpath fill=%22%234285F4%22 d=%22M30 16H20l-4 4h14z%22/%3E%3Cpath fill=%22%23FBBC05%22 d=%22M6 16v4h10l4-4z%22/%3E%3Cpath fill=%22%23EA4335%22 d=%22M20 16V6h-4v14z%22/%3E%3Cpath fill=%22none%22 d=%22M0 0h36v36H0z%22/%3E%3C/svg%3E');
+    position: relative;
+    border-radius: 50%;
+    border-width: 0;
+    margin: 0 13px 0 9px;
+    height: 36px;
+}
+
+.AddIcon__text {
+    /* box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149); */
+    align-items: center;
+    background-color: #fff;
+    background-image: none;
+    /* border: 1px solid transparent; */
+    /* border-radius: 24px; */
+    color: #3c4043;
+    display: inline-flex;
+    font-weight: 500;
+    font-size: 14px;
+    height: 48px;
+    letter-spacing: .15px;
+    line-height: 22px;
+    margin: 0;
+    /* min-width: 120px; */
+    /* padding: 0 24px 0 0; */
+    text-transform: none;
+    /* width: inherit; */
 }
