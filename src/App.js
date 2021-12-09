@@ -4,6 +4,8 @@ import Sidebar from './component/sidebar';
 import FileView from './component/File/FileView';
 import SideIcons from './component/sideIcons';
 import {useState} from 'react';
+import Menu from './component/App/Menu';
+
 // import { Container } from "react-bootstrap";
 function App() {
 

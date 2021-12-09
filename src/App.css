@@ -1,3 +1,5 @@
+@import url('./component/CSS/ContextMenu.css');
+
 .app__main {
     display: flex;
 }
