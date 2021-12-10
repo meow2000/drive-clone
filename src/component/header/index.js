@@ -16,7 +16,7 @@ const index = () => {
             <div className="header__searchContainer">
                 <div className="header__searchBar">
                     <SearchIcon/>
-                    <input type="text"/>
+                    <input type="text" placeholder="Tìm trong Drive"/>
                     <ExpandMoreIcon/>
                 </div>
             </div>
@@ -25,7 +25,7 @@ const index = () => {
                     <HelpOutlineIcon />
                     <SettingsIcon />
                 </span>
-                <AppsIcon />
+                <div class="m-user-avatar m-icon"></div>
                 {/* setting icon, user avatar, help button */}
             </div>
         </div>

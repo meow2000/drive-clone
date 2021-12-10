@@ -1,5 +1,9 @@
 @import url('./component/CSS/ContextMenu.css');
 
+body {
+    overflow: hidden;
+}
+
 .app__main {
     display: flex;
 }

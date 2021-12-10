@@ -30,6 +30,7 @@ const FilesView = () => {
                     <p>Name</p>
                 </div>
                 <div className="fileView__titles--right">
+                    <p>File owner</p>
                     <p>Last modified</p>
                     <p>File size</p>
                 </div>
@@ -40,6 +41,8 @@ const FilesView = () => {
                 //     <FileItem id="meow" caption="test" timestamp="hôm qua" fileUrl={item.fileUrl} size="nhiều" />
                 // ))
             }
+            {<FileItem/>}
+            {<FileItem/>}
         </div>
     )
 }

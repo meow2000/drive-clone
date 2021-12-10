@@ -27,11 +27,13 @@ const FileItem = ({ id, caption, timestamp, fileUrl, size }) => {
                     <p>{caption}test.png</p>
                 </div>
                 <div className="fileItem--right">
+                    <p>me</p>
                     <p>Hôm nay</p>
-                    <p>Nhiều</p>
+                    <p>3,4 MB</p>
                 </div>
             </a>
         </div>
+        
     )
 }
 

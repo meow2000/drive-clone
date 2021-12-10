@@ -1,48 +1,25 @@
 import React, {useState} from 'react'
 import '../CSS/NewFile.css'
 import ApiService from '../FileHandler/ApiService';
-import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/styles';
 import {useRef} from 'react'
-
-function getModalStyle() {
-    return {
-        top: `50%`,
-        left: `50%`,
-        transform: `translate(-50%, -50%)`,
-    };
-}
-
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: "white",
-        // backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        // boxShadow: theme.shadows[5],
-        // padding: theme.spacing(2, 4, 3),
-    },
-}));
 
 const NewFile = () => {
     // handle upload file
     const fileInputRef=useRef();
-    const classes = useStyles();
 
-    const [modalStyle] = useState(getModalStyle);
     const [open, setOpen] = useState(false);
-    const [file, setFile] = React.useState("");
+    const [file, setFile] = useState([]);
     const [uploading, setUploading] = useState(false)
 
     const onFileChangeHandler = (event) => {
         event.preventDefault();
-        debugger
         if(event.target.files[0]) {
             setFile(event.target.files[0]);
         }
         const formData = new FormData();
         formData.append('file', file);
+        console.log(event.target.files[0]);
         debugger
         ApiService.upload(formData)
             .then(res => {
