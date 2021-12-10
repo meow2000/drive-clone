@@ -30,7 +30,7 @@ const Menu = () => {
         <li className="menu__list-wrapper" style={{marginTop: "5px"}}>
           <div className="menu__list">
             <div size={20} className="menu__icon" />
-            <div className="menu__text">Ứng dụng khác</div>
+            <div className="menu__text" style={{margin: "24px"}}>Ứng dụng khác</div>
           </div>
         </li>
       </ul>
