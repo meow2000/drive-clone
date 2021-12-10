@@ -2,6 +2,8 @@ import useContextMenu from "./useContext";
 import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
 const Menu = () => {
   const { anchorPoint, show } = useContextMenu();
 
@@ -24,6 +26,12 @@ const Menu = () => {
           <div className="menu__list">
             <DriveFolderUploadOutlinedIcon size={20} className="menu__icon" />
             <div className="menu__text">Tải thư mục lên</div>
+          </div>
+        </li>
+        <li className="menu__list-wrapper">
+          <div className="menu__list">
+            <DeleteOutlineOutlinedIcon size={20} className="menu__icon" />
+            <div className="menu__text">Xóa</div>
           </div>
         </li>
         <hr />

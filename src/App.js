@@ -37,7 +37,7 @@ function App() {
               <div className="app__main">
                       <Sidebar />
                       <FileView />
-                      <SideIcons />
+                      {/* <SideIcons /> */}
               </div>
           </>
         ) : (
