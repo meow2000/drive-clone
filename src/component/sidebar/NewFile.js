@@ -9,22 +9,24 @@ const NewFile = () => {
     const fileInputRef=useRef();
 
     const [open, setOpen] = useState(false);
-    const [file, setFile] = useState([]);
+    // const [file, setFile] = useState([]);
     const [uploading, setUploading] = useState(false)
 
     const onFileChangeHandler = (event) => {
         event.preventDefault();
+        var file;
         if(event.target.files[0]) {
-            setFile(event.target.files[0]);
+            file = event.target.files[0];
         }
         const formData = new FormData();
         formData.append('file', file);
-        console.log(event.target.files[0]);
+        console.log(formData);
         debugger
         UserService.upload(formData)
             .then(res => {
                     console.log(res.data);
                     alert("File uploaded successfully.")
+                    window.location.reload();
             })
         // setUploading(false)
         // setOpen(false)

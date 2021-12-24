@@ -13,6 +13,7 @@ class UserService {
   }
 
   upload(data) {
+    debugger
     return axios.post(API_URL + 'uploadFile', data, { headers: authHeader()});
   }
 
