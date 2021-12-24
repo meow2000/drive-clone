@@ -40,11 +40,11 @@ class App extends Component {
     fileList = await UserService.getListFile();
     if (user) {
       this.setState({
-        fileList: fileList.data,
+        fileList: fileList,
         currentUser: user
       });
     }
-    console.log(fileList.data);
+    // console.log(fileList);
   }
 
   render() {
@@ -59,7 +59,7 @@ class App extends Component {
               <Header />
               <div className="app__main">
                 <Sidebar />
-                <FileView />
+                <FileView fileList={fileList}/>
                 {/* <SideIcons /> */}
               </div>
             </>

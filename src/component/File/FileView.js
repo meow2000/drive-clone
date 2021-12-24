@@ -5,9 +5,9 @@ import FileItem from './FileItem'
 import FileCard from './FileCard'
 import FileDownload from '../fileDownload/FileDownload';
 
-const FilesView = () => {
-    const [files, setFiles] = useState([])
-
+const FilesView = (props) => {
+    const [files, setFiles] = useState(props.fileList.data);
+    const items = [];
     return (
         <div className='fileView'>
             <div className="fileView__row">
@@ -36,13 +36,11 @@ const FilesView = () => {
                 </div>
             </div>
             {
-                <FileItem/>
-                // files.map(({ id, item }) => (
-                //     <FileItem id="meow" caption="test" timestamp="hôm qua" fileUrl={item.fileUrl} size="nhiều" />
-                // ))
+                // <FileItem/>
+                files.map( item => (
+                    <FileItem id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} />
+                ))
             }
-            {<FileItem/>}
-            {<FileItem/>}
         </div>
     )
 }
