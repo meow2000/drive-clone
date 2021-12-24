@@ -6,10 +6,11 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const FileItem = ({ id, caption, timestamp, size }) => {
-    // var t = new Date();
-    // t.setSeconds(1370001284);
-    // var fileDate = moment(t).format("dd.mm.yyyy hh:MM:ss");  
-
+    const formatDate = (timestamp) => {
+        const options = { year: "numeric", month: "long", day: "numeric" }
+        return new Date(timestamp).toLocaleDateString(undefined, options)
+    }
+    const fileDate = formatDate(timestamp);
     const getReadableFileSizeString = (fileSizeInBytes) => {
         let i = -1;
         const byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -30,7 +31,7 @@ const FileItem = ({ id, caption, timestamp, size }) => {
                 </div>
                 <div className="fileItem--right">
                     <p>me</p>
-                    <p>{timestamp}</p>
+                    <p>{fileDate}</p>
                     <p>{getReadableFileSizeString(size)}</p>
                 </div>
             </a>

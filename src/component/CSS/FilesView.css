@@ -27,3 +27,7 @@
 .fileView__titles--right {
     display: flex;
 }
+
+.fileView__titles--right>p {
+    padding-left: 20px;
+}
