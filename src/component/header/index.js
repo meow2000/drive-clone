@@ -25,7 +25,7 @@ const index = () => {
                     <HelpOutlineIcon />
                     <SettingsIcon />
                 </span>
-                <div class="m-user-avatar m-icon"></div>
+                <div className="m-user-avatar m-icon"></div>
                 {/* setting icon, user avatar, help button */}
             </div>
         </div>

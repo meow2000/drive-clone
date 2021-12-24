@@ -1,54 +1,87 @@
+import React, { Component } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import './App.css';
 import Header from './component/header';
 import Sidebar from './component/sidebar';
-import FileView from './component/File/FileView';
-import SideIcons from './component/sideIcons';
-import {useState} from 'react';
+import FileView from './component/file/FileView';
+// import SideIcons from './component/sideIcons';
+import UserService from "./component/authHandler/user.service";
 import Menu from './component/App/Menu';
+import Login from './component/accessControl/Login'
+import "bootstrap/dist/css/bootstrap.min.css";
+import AuthService from "./component/authHandler/auth.service";
 
 // import { Container } from "react-bootstrap";
-function App() {
+class App extends Component {
 
-  const [user, setUser] = useState({
-    
-  })
+  // const [user, setUser] = useState({
 
-  const handleLogin = () => {
-    // if (!user) {
-    //   auth.signInWithPopup(provider).then((result) => {
-    //     setUser(result.user)
-    //     console.log(result.user)
-    //   }).catch((error) => {
-    //     alert(error.message);
-    //   });
-    // } else if (user) {
-    //   auth.signOut().then(() => {
-    //     setUser(null)
-    //   }).catch((err) => alert(err.message))
-    // }
+  // })
+
+  // if(!user) {
+  //   setUser(AuthService.getCurrentUser());
+  //   debugger
+  // }
+
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fileList: undefined,
+      currentUser: undefined
+    };
   }
 
-  return (
-    <div className="App">
-      {
-        true ? (
-          <>
-            <Header />
+  async componentDidMount() {
+    const user = AuthService.getCurrentUser();
+    var fileList = [];
+    fileList = await UserService.getListFile();
+    if (user) {
+      this.setState({
+        fileList: fileList.data,
+        currentUser: user
+      });
+    }
+    console.log(fileList.data);
+  }
+
+  render() {
+
+    const { currentUser, fileList } = this.state;
+    return (
+      <div className="App">
+        {
+          currentUser ? (
+            <>
+              <Menu />
+              <Header />
               <div className="app__main">
-                      <Sidebar />
-                      <FileView />
-                      {/* <SideIcons /> */}
+                <Sidebar />
+                <FileView />
+                {/* <SideIcons /> */}
               </div>
-          </>
-        ) : (
-            <div className='app__login'>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1024px-Google_2015_logo.svg.png" alt="Google Drive" />
-              <button onClick={handleLogin}>Log in to Google Drive</button>
-            </div>
+            </>
+          ) : (
+            <>
+              <div className="auth-wrapper">
+                <div className="auth-inner">
+                  <Login />
+                </div>
+              </div>
+            </>
           )
-      }
-    </div>
-  );
+        }
+        <div className="container mt-3">
+          <Routes>
+            <Route exact path={"/"} component={App} />
+            <Route exact path="/login" component={Login} />
+          </Routes>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

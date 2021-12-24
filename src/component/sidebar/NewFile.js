@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import '../CSS/NewFile.css'
-import ApiService from '../FileHandler/ApiService';
+import UserService from '../authHandler/user.service';
 import { makeStyles } from '@material-ui/styles';
 import {useRef} from 'react'
 
@@ -21,7 +21,7 @@ const NewFile = () => {
         formData.append('file', file);
         console.log(event.target.files[0]);
         debugger
-        ApiService.upload(formData)
+        UserService.upload(formData)
             .then(res => {
                     console.log(res.data);
                     alert("File uploaded successfully.")

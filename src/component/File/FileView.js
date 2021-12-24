@@ -3,7 +3,7 @@ import '../CSS/FilesView.css';
 
 import FileItem from './FileItem'
 import FileCard from './FileCard'
-import FileDownload from '../FileDownload/FileDownload';
+import FileDownload from '../fileDownload/FileDownload';
 
 const FilesView = () => {
     const [files, setFiles] = useState([])
