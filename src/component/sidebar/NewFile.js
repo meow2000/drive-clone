@@ -22,7 +22,7 @@ const NewFile = () => {
         formData.append('file', file);
         console.log(formData);
         debugger
-        UserService.upload(formData)
+        UserService.uploadFile(formData)
             .then(res => {
                     console.log(res.data);
                     alert("File uploaded successfully.")

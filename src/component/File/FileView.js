@@ -38,7 +38,7 @@ const FilesView = (props) => {
             {
                 // <FileItem/>
                 files.map( item => (
-                    <FileItem key={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} />
+                    <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} />
                 ))
             }
         </div>

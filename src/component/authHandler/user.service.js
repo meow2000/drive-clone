@@ -12,13 +12,14 @@ class UserService {
     return await axios.get(API_URL + 'listFile', { headers: authHeader() });
   }
 
-  upload(data) {
-    debugger
-    return axios.post(API_URL + 'uploadFile', data, { headers: authHeader()});
+  uploadFile(file) {
+    return axios.post(API_URL + 'uploadFile', file, { headers: authHeader()});
   }
 
-  getModeratorBoard() {
-    return axios.get(API_URL + 'mod', { headers: authHeader() });
+  downloadFile(fileName) {
+    debugger
+    console.log(authHeader());
+    return axios.get(API_URL + 'downloadFile', {params: {"fileName": fileName}}, { headers: authHeader() });
   }
 
   getAdminBoard() {

@@ -55,7 +55,7 @@ class App extends Component {
         {
           currentUser ? (
             <>
-              <Menu />
+              {/* <Menu /> */}
               <Header />
               <div className="app__main">
                 <Sidebar />
