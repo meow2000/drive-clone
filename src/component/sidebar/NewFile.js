@@ -21,7 +21,6 @@ const NewFile = () => {
         const formData = new FormData();
         formData.append('file', file);
         console.log(formData);
-        debugger
         UserService.uploadFile(formData)
             .then(res => {
                     console.log(res.data);

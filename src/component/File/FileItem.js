@@ -2,8 +2,9 @@ import React from 'react';
 import '../CSS/FileItem.css';
 import UserService from '../authHandler/user.service';
 import fileDownload from 'js-file-download';
-
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
+import '../CSS/ContextMenuComponent.css';
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -23,28 +24,18 @@ const FileItem = ({ id, caption, timestamp, size }) => {
 
         return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
     };
-    const DownloadOnClick = (event) => {
-        event.preventDefault();
+    const DownloadFile= () => {
+        // event.preventDefault();
         console.log(caption);
         const formData = new FormData();
         formData.append('fileName', caption);
-        // fetch('http://localhost:8080/user/downloadFile?fileName=0ohv3srxzb631.jpg', 
-        // {
-        //     method: "get",
-        //     headers: new Headers({
-        //     'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjQwNTcyNTkyLCJleHAiOjE2NDExNzczOTJ9.6Ru5a_YiGTT0GGF895WCcugrlNPQ9arTc2vYJRXprKttpcGhTTHiwNT3QDPp67UnLaBmDsXsF6MHvmUubX0wPQ',
-        //     })
-        // })
-        //     .then(response => {
-        //         console.log(response);
-        //         debugger
-        //     });
 
         UserService.downloadFile(caption).then(response => {
-            debugger
             console.log(response);
+            fileDownload(response.data, caption);
+            // debugger
             // const type = response.headers['content-type'];
-            // const blob = new Blob([response.body], { type: type, encoding: 'UTF-8' });
+            // const blob = new Blob([response.data], { type: type, encoding: 'UTF-8' });
             // const link = document.createElement('a');
             // link.href = window.URL.createObjectURL(blob);
             // link.download = caption;
@@ -52,8 +43,48 @@ const FileItem = ({ id, caption, timestamp, size }) => {
         });
     }
 
+    const DeleteFile = () => {
+        // event.preventDefault();
+        UserService.deleteFile(id).then(response => {
+            console.log(response);
+            window.location.reload();
+        });
+    }
+    const menuItems = [
+        {
+            iconCss: 'e-cm-icons e-cut',
+            text: 'Tải xuống'
+        },
+        {
+            text: 'Tải tệp lên'
+        },
+        {
+            text: 'Chia sẻ tệp'
+        },
+        {
+            text: 'Xoá'
+        },
+        {
+            separator: true
+        },
+        {
+            text: 'Ứng dụng khác'
+        }
+    ];
+
+    const select = (args) => {
+        if (args.item.text === 'Tải xuống') {
+            alert("Tải rồi");
+            DownloadFile();
+        }
+        if (args.item.text === 'Xoá') {
+            alert("Xóa đấy")
+            DeleteFile();
+        }
+    };
+
     return (
-        <div className='fileItem' onClick={DownloadOnClick}>
+        <div id='fileItem' className='fileItem' >
             <a target="_blank" download>
                 <div className="fileItem--left">
                     <InsertDriveFileIcon />
@@ -65,6 +96,7 @@ const FileItem = ({ id, caption, timestamp, size }) => {
                     <p>{getReadableFileSizeString(size)}</p>
                 </div>
             </a>
+            <ContextMenuComponent target="#fileItem" items={menuItems} select={select}/>
         </div>
 
     )

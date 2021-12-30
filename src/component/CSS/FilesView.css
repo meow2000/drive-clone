@@ -10,8 +10,43 @@
     align-items: center;
 }
 
+.fileView__header {
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    position: relative;
+}
+
+.header__folderTree {
+    margin: 5px;
+    font-family: Google Sans, Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-variant-ligatures: no-contextual;
+    font-size: 18px;
+    border-radius: 8px;
+    line-height: 24px;
+    /* padding: 4px 8px 4px; */
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #3c4043;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-box-flex: 0 1 auto;
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 100%;
+}
+
+
 .fileView__titles {
     display: flex;
+    margin-top: 20px;
     margin-bottom: 5px;
     color: rgb(85, 78, 78);
 }

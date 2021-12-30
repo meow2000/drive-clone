@@ -20,7 +20,7 @@ const index = () => {
             <div className="sideBar__container">
                 <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} />
                 <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
-                <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} />
+                <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} />
                 <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
                 <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} />
                 <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} />

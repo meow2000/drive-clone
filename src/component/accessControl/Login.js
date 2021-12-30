@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import '../CSS/Login.css';
-import { useNavigate } from 'react-router-dom';
 import AuthService from "../authHandler/auth.service";
 import App from "../../App";
+import { Link } from "react-router-dom";
+import Register from './Register'
+
 export default class Login extends Component {
 
     constructor(props) {
@@ -10,6 +12,7 @@ export default class Login extends Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
+        this.RedirectToSignUp = this.RedirectToSignUp.bind(this);
         this.state = {
             username: "",
             password: "",
@@ -42,6 +45,10 @@ export default class Login extends Component {
         // navigate("/");
     }
 
+    RedirectToSignUp() {
+        (<Register />)
+    }
+
     render() {
         return (
             <form className="m-form"
@@ -52,7 +59,7 @@ export default class Login extends Component {
                 <div className="m-form__header">
                     <div className="m-form__header__logo"></div>
                 </div>
-                <div className="m-form__header__title">Đăng nhập</div>
+                <div className="m-form__header__title">Sign in</div>
 
                 <div className="form-group">
                     <label>Email address</label>
@@ -82,10 +89,12 @@ export default class Login extends Component {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                <button type="submit" className="btn btn-primary btn-block">Sign in</button>
+                
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    DON'T HAVE AN ACCOUNT ? <Link to='/sign-up' element={<Register />}>SIGN UP</Link>
                 </p>
+                
             </form>
         );
     }

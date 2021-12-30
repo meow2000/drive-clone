@@ -1,0 +1,25 @@
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.e-contextmenu {
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 16px 0 16px 0;
+    width: 200px;
+    height: auto;
+    margin: 0;
+    position: absolute;
+    list-style: none;
+    box-shadow: 0 0 20px 0 #ccc;
+}

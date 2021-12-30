@@ -13,17 +13,20 @@ class UserService {
   }
 
   uploadFile(file) {
-    return axios.post(API_URL + 'uploadFile', file, { headers: authHeader()});
+    return axios.post(API_URL + 'uploadFile', file, { headers: authHeader() });
   }
 
-  downloadFile(fileName) {
-    debugger
+  async downloadFile(fileName) {
     console.log(authHeader());
-    return axios.get(API_URL + 'downloadFile', {params: {"fileName": fileName}}, { headers: authHeader() });
+    return await axios.get(API_URL + `downloadFile`, { headers: authHeader(), params: { fileName: fileName }, responseType: 'blob' });
   }
 
-  getAdminBoard() {
-    return axios.get(API_URL + 'admin', { headers: authHeader() });
+  deleteFile(oid) {
+    return axios.delete(API_URL + 'deleteFile', { headers: authHeader(), params: { oid: oid } });
+  }
+
+  listFileShare() {
+    return axios.get(API_URL + "shareWithMe", { headers: authHeader() });
   }
 }
 

@@ -7,6 +7,7 @@ const useContextMenu = () => {
   const handleContextMenu = useCallback(
     (event) => {
       event.preventDefault();
+      debugger
       setAnchorPoint({ x: event.pageX, y: event.pageY });
       setShow(true);
     },

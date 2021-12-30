@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
 
 import './App.css';
 import Header from './component/header';
@@ -11,26 +12,17 @@ import Menu from './component/App/Menu';
 import Login from './component/accessControl/Login'
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "./component/authHandler/auth.service";
+import Register from "./component/accessControl/Register";
 
 // import { Container } from "react-bootstrap";
 class App extends Component {
-
-  // const [user, setUser] = useState({
-
-  // })
-
-  // if(!user) {
-  //   setUser(AuthService.getCurrentUser());
-  //   debugger
-  // }
-
-
   constructor(props) {
     super(props);
 
     this.state = {
       fileList: undefined,
-      currentUser: undefined
+      currentUser: undefined,
+      isLogin: false
     };
   }
 
@@ -46,9 +38,7 @@ class App extends Component {
     }
     // console.log(fileList);
   }
-
   render() {
-
     const { currentUser, fileList } = this.state;
     return (
       <div className="App">
@@ -59,26 +49,26 @@ class App extends Component {
               <Header />
               <div className="app__main">
                 <Sidebar />
-                <FileView fileList={fileList}/>
+                <FileView fileList={fileList} FileHandler={this.FileHandler} />
                 {/* <SideIcons /> */}
+                {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
               </div>
             </>
           ) : (
             <>
               <div className="auth-wrapper">
                 <div className="auth-inner">
-                  <Login />
+                  <Routes>
+                    {/* <Route path="/" element={<App />} /> */}
+                    <Route index element={<Login />} />
+                    <Route path="/sign-in" element={<Login />} />
+                    <Route path="/sign-up" element={<Register />} />
+                  </Routes>
                 </div>
               </div>
             </>
           )
         }
-        <div className="container mt-3">
-          <Routes>
-            <Route exact path={"/"} component={App} />
-            <Route exact path="/login" component={Login} />
-          </Routes>
-        </div>
       </div>
     );
   }

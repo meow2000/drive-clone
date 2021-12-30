@@ -4,6 +4,7 @@
     /* border-radius: 0 100px 100px 0; */
     /* width: 200px; */
     cursor: pointer;
+    align-items: center;
 }
 
 .sideBar__itemContainer:hover{
@@ -18,8 +19,10 @@
 
 .sidebar__item{
     display: flex;
+    align-items: center;
+    text-align: center;
 }
 
-.sidebar__item>p{
+.sidebar__item__text{
     margin-left: 12px;
 }
