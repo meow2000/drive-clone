@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import NewFile from "../sidebar/NewFile";
 import SidebarItem from "../sidebar/Item";
 // material UI
@@ -12,26 +12,67 @@ import StorageIcon from '@material-ui/icons/Storage';
 // css file
 import '../CSS/Sidebar.css';
 
-const index = () => {
+export default class index extends Component {
 
-    return (
-        <div className="sideBar">
-            <NewFile/>
-            <div className="sideBar__container">
-                <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} />
-                <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
-                <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} />
-                <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
-                <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} />
-                <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} />
-                
-                <hr/>
-                
-                <SidebarItem icon={(<StorageIcon />)} label={'Storage'} />
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            fileList: ""
+        }
+        this.setFileShareList = this.setFileShareList.bind(this);
+        this.setMyFileList = this.setMyFileList.bind(this);
+        this.setFileForApp = this.setFileForApp.bind(this);
+        this.setBinFileList = this.setBinFileList.bind(this);
+    }
+
+    setBinFileList(file) {
+        this.setState({
+            fileList: file
+        });
+        this.setFileForApp(file)
+    }
+
+    setMyFileList(file) {
+        this.setState({
+            fileList: file
+        });
+        this.setFileForApp(file)
+    }
+
+    setFileShareList(file) {
+        this.setState({
+            fileList: file
+        });
+        this.setFileForApp(file)
+    }
+
+    setFileForApp(file) {
+        console.log(file)
+        this.props.FileHandler(file);
+    }
+
+
+    render() {
+        return (
+            <div className="sideBar">
+                <NewFile />
+                <div className="sideBar__container">
+                    <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setMyFileList} />
+                    <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
+                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setFileShareList} />
+                    <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
+                    <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} />
+                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setBinFileList}/>
+
+                    <hr />
+
+                    <SidebarItem icon={(<StorageIcon />)} label={'Storage'} />
+
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default index
+// export default index

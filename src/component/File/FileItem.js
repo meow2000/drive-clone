@@ -5,6 +5,7 @@ import fileDownload from 'js-file-download';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
 import '../CSS/ContextMenuComponent.css';
+import DlgPopup from '../popup/RandomPopup';
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -24,7 +25,7 @@ const FileItem = ({ id, caption, timestamp, size }) => {
 
         return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
     };
-    const DownloadFile= () => {
+    const DownloadFile = () => {
         // event.preventDefault();
         console.log(caption);
         const formData = new FormData();
@@ -50,19 +51,24 @@ const FileItem = ({ id, caption, timestamp, size }) => {
             window.location.reload();
         });
     }
+
+    const ShareFile = () => {
+        this.DlgPopup.show();
+    }
+
     const menuItems = [
         {
             iconCss: 'e-cm-icons e-cut',
             text: 'Tải xuống'
         },
         {
-            text: 'Tải tệp lên'
-        },
-        {
             text: 'Chia sẻ tệp'
         },
         {
             text: 'Xoá'
+        },
+        {
+            text: 'Tải tệp lên'
         },
         {
             separator: true
@@ -76,29 +82,32 @@ const FileItem = ({ id, caption, timestamp, size }) => {
         if (args.item.text === 'Tải xuống') {
             alert("Tải rồi");
             DownloadFile();
-        }
-        if (args.item.text === 'Xoá') {
+        } else if (args.item.text === 'Xoá') {
             alert("Xóa đấy")
             DeleteFile();
+        } else if (args.item.text === 'Chia sẻ tệp') {
+            // DlgPopup.show();
         }
     };
 
     return (
-        <div id='fileItem' className='fileItem' >
-            <a target="_blank" download>
-                <div className="fileItem--left">
-                    <InsertDriveFileIcon />
-                    <p>{caption}</p>
-                </div>
-                <div className="fileItem--right">
-                    <p>me</p>
-                    <p>{fileDate}</p>
-                    <p>{getReadableFileSizeString(size)}</p>
-                </div>
-            </a>
-            <ContextMenuComponent target="#fileItem" items={menuItems} select={select}/>
+        <div>
+            {/* <DlgPopup ref={dlg}/> */}
+            <div id='fileItem' className='fileItem' >
+                <a target="_blank" download>
+                    <div className="fileItem--left">
+                        <InsertDriveFileIcon />
+                        <p>{caption}</p>
+                    </div>
+                    <div className="fileItem--right">
+                        <p>me</p>
+                        <p>{fileDate}</p>
+                        <p>{getReadableFileSizeString(size)}</p>
+                    </div>
+                </a>
+                <ContextMenuComponent target="#fileItem" items={menuItems} select={select} />
+            </div>
         </div>
-
     )
 }
 

@@ -28,6 +28,10 @@ class UserService {
   listFileShare() {
     return axios.get(API_URL + "shareWithMe", { headers: authHeader() });
   }
+
+  listFileBin() {
+    return axios.get(API_URL + "trash", { headers: authHeader() });
+  }
 }
 
 export default new UserService();

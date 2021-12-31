@@ -24,6 +24,7 @@ class App extends Component {
       currentUser: undefined,
       isLogin: false
     };
+    this.FileHandler = this.FileHandler.bind(this)
   }
 
   async componentDidMount() {
@@ -36,8 +37,14 @@ class App extends Component {
         currentUser: user
       });
     }
-    // console.log(fileList);
   }
+
+  FileHandler(file) {
+    this.setState({
+      fileList: file
+    });
+  }
+
   render() {
     const { currentUser, fileList } = this.state;
     return (
@@ -48,8 +55,8 @@ class App extends Component {
               {/* <Menu /> */}
               <Header />
               <div className="app__main">
-                <Sidebar />
-                <FileView fileList={fileList} FileHandler={this.FileHandler} />
+                <Sidebar FileHandler={this.FileHandler}/>
+                <FileView fileList={fileList} />
                 {/* <SideIcons /> */}
                 {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
               </div>
