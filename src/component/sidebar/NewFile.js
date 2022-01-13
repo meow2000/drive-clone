@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import '../CSS/NewFile.css'
 import UserService from '../authHandler/user.service';
-import { makeStyles } from '@material-ui/styles';
-import {useRef} from 'react'
+import { useRef } from 'react'
 
-const NewFile = () => {
+const NewFile = ({setFile}) => {
     // handle upload file
-    const fileInputRef=useRef();
+    const fileInputRef = useRef();
 
     const [open, setOpen] = useState(false);
     // const [file, setFile] = useState([]);
@@ -15,7 +14,7 @@ const NewFile = () => {
     const onFileChangeHandler = (event) => {
         event.preventDefault();
         var file;
-        if(event.target.files[0]) {
+        if (event.target.files[0]) {
             file = event.target.files[0];
         }
         const formData = new FormData();
@@ -23,9 +22,10 @@ const NewFile = () => {
         console.log(formData);
         UserService.uploadFile(formData)
             .then(res => {
-                    console.log(res.data);
-                    alert("File uploaded successfully.")
-                    window.location.reload();
+                console.log(res.data);
+                UserService.getListFile().then(res => {
+                    setFile(res);
+                })
             })
         // setUploading(false)
         // setOpen(false)
@@ -50,34 +50,13 @@ const NewFile = () => {
     // ---------------------------------------------------
     return (
         <div className="newFile">
-            <div className="newFile__container" onClick={()=>fileInputRef.current.click()}>
+            <div className="newFile__container" onClick={() => fileInputRef.current.click()}>
                 {/* Plus */}
                 <div className="AddIcon"></div>
                 <p className="AddIcon__text">Mới</p>
                 {/* <input type="file" className="form-control" name="file" onChange={onFileChangeHandler}/> */}
-                <input onChange={onFileChangeHandler} multiple={false} ref={fileInputRef} type="file"hidden name="file"/>
+                <input onChange={onFileChangeHandler} multiple={false} ref={fileInputRef} type="file" hidden name="file" />
             </div>
-
-            {/* <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    <p>Select files you want to upload!</p>
-                    {
-                        uploading ? (
-                            <p>Uploading...</p>
-                        ) : (
-                                <>
-                                    <input type="file" onChange={handleChange} />
-                                    <button onClick={onFileChangeHandler}>Upload</button>
-                                </>
-                            )
-                    }
-                </div>
-            </Modal> */}
         </div>
     )
 }

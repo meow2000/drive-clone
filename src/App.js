@@ -20,8 +20,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      fileList: undefined,
-      currentUser: undefined,
+      fileList: null,
+      currentUser: null,
       isLogin: false
     };
     this.FileHandler = this.FileHandler.bind(this)
@@ -52,7 +52,6 @@ class App extends Component {
         {
           currentUser ? (
             <>
-              {/* <Menu /> */}
               <Header />
               <div className="app__main">
                 <Sidebar FileHandler={this.FileHandler}/>

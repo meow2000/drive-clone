@@ -9,11 +9,11 @@ class AuthService {
                 username,
                 password
             });
-        if (response.data) {
-            localStorage.setItem("user", JSON.stringify(response.data));
+        if (response.data.data) {
+            localStorage.setItem("user", JSON.stringify(response.data.data));
         }
-        
-        return response.data;
+
+        return response.data.data;
     }
 
     logout() {
@@ -29,7 +29,7 @@ class AuthService {
     }
 
     getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));;
+        return JSON.parse(localStorage.getItem('user'));
     }
 }
 

@@ -26,3 +26,12 @@
 .sidebar__item__text{
     margin-left: 12px;
 }
+
+.a-la-B-x {
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 16px 24px 14px;
+}

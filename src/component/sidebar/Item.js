@@ -2,7 +2,7 @@
 import React from 'react'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import '../CSS/SidebarItem.css';
-import FileView from '../file/FileView';
+// import FileView from '../file/FileView';
 import UserService from '../authHandler/user.service';
 import { AirlineSeatIndividualSuiteSharp } from '@mui/icons-material';
 

@@ -37,7 +37,7 @@ export default class Login extends Component {
         e.preventDefault();
         AuthService
             .login(this.state.username, this.state.password)
-            .then(() => {
+            .then((res) => {
                 <App />
                 window.location.reload();
             })

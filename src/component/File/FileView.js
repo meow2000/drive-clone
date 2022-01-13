@@ -28,7 +28,6 @@ export default class FileView extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ files: nextProps.fileList.data });
-        debugger
     }
 
     render() {

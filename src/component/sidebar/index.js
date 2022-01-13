@@ -20,18 +20,18 @@ export default class index extends Component {
         this.state = {
             fileList: ""
         }
-        this.setFileShareList = this.setFileShareList.bind(this);
+        // this.setFileShareList = this.setFileShareList.bind(this);
         this.setMyFileList = this.setMyFileList.bind(this);
         this.setFileForApp = this.setFileForApp.bind(this);
-        this.setBinFileList = this.setBinFileList.bind(this);
+        // this.setBinFileList = this.setBinFileList.bind(this);
     }
 
-    setBinFileList(file) {
-        this.setState({
-            fileList: file
-        });
-        this.setFileForApp(file)
-    }
+    // setBinFileList(file) {
+    //     this.setState({
+    //         fileList: file
+    //     });
+    //     this.setFileForApp(file)
+    // }
 
     setMyFileList(file) {
         this.setState({
@@ -40,12 +40,12 @@ export default class index extends Component {
         this.setFileForApp(file)
     }
 
-    setFileShareList(file) {
-        this.setState({
-            fileList: file
-        });
-        this.setFileForApp(file)
-    }
+    // setFileShareList(file) {
+    //     this.setState({
+    //         fileList: file
+    //     });
+    //     this.setFileForApp(file)
+    // }
 
     setFileForApp(file) {
         console.log(file)
@@ -56,14 +56,14 @@ export default class index extends Component {
     render() {
         return (
             <div className="sideBar">
-                <NewFile />
+                <NewFile setFile={this.setMyFileList}/>
                 <div className="sideBar__container">
                     <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setMyFileList} />
                     <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
-                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setFileShareList} />
+                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setMyFileList} />
                     <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
                     <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} />
-                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setBinFileList}/>
+                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setMyFileList}/>
 
                     <hr />
 

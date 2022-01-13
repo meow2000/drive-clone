@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import '../CSS/FileItem.css';
 import UserService from '../authHandler/user.service';
 import fileDownload from 'js-file-download';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
 import '../CSS/ContextMenuComponent.css';
-import DlgPopup from '../popup/RandomPopup';
+import Popup from '../popup/Popup';
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -47,6 +47,7 @@ const FileItem = ({ id, caption, timestamp, size }) => {
     const DeleteFile = () => {
         // event.preventDefault();
         UserService.deleteFile(id).then(response => {
+
             console.log(response);
             window.location.reload();
         });
@@ -55,6 +56,8 @@ const FileItem = ({ id, caption, timestamp, size }) => {
     const ShareFile = () => {
         this.DlgPopup.show();
     }
+
+    const myRef = useRef();
 
     const menuItems = [
         {
@@ -77,22 +80,30 @@ const FileItem = ({ id, caption, timestamp, size }) => {
             text: 'Ứng dụng khác'
         }
     ];
+    const [toggled, setToggled] = useState(false);
+    const handleToggle = () => {
+        setToggled(!toggled)
+    }
 
     const select = (args) => {
         if (args.item.text === 'Tải xuống') {
             alert("Tải rồi");
             DownloadFile();
         } else if (args.item.text === 'Xoá') {
-            alert("Xóa đấy")
             DeleteFile();
         } else if (args.item.text === 'Chia sẻ tệp') {
             // DlgPopup.show();
+            handleToggle();
         }
     };
 
+    var userNameShare = null;
+    const HandleShare = () => {
+        console.log(userNameShare);
+    }
+
     return (
         <div>
-            {/* <DlgPopup ref={dlg}/> */}
             <div id='fileItem' className='fileItem' >
                 <a target="_blank" download>
                     <div className="fileItem--left">
@@ -107,6 +118,11 @@ const FileItem = ({ id, caption, timestamp, size }) => {
                 </a>
                 <ContextMenuComponent target="#fileItem" items={menuItems} select={select} />
             </div>
+            {toggled && <div className="RandomPopup" id="randomPopup" ref={myRef}>
+                <input type="text" id="userName" value={userNameShare} />
+                <button className='m-random-btn' onClick={HandleShare}>Submit</button>
+            </div>}
+            <Popup/>
         </div>
     )
 }
