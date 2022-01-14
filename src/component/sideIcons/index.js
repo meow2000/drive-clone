@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CSS/SideIcons.css';
+import '../Styles/SideIcons.css';
 import AddIcon from '@material-ui/icons/Add';
 
 const index = () => {

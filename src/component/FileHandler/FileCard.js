@@ -1,5 +1,5 @@
 import React from 'react'
-import '../CSS/FileCard.css'
+import '../Styles/FileCard.css'
 
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 

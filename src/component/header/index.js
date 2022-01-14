@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HelpOutlineIcon from '@mui/icons-material/Help';
 import SettingsIcon from '@mui/icons-material/Settings';
 // import AppsIcon from '@mui/icons-material/Apps';
-import "../CSS/Header.css";
+import "../Styles/Header.css";
 import DetailPanel from './DetailPanel';
 
 export default class index extends Component {

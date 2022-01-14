@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../CSS/FilesView.css';
+import '../Styles/FilesView.css';
 import FileItem from './FileItem'
 // import FileCard from './FileCard'
-import '../CSS/ContextMenuComponent.css';
+import '../Styles/ContextMenuComponent.css';
 
 export default class FileView extends Component {
     constructor(props) {

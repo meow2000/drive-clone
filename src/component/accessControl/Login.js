@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import '../CSS/Login.css';
-import AuthService from "../authHandler/auth.service";
+import '../Styles/Login.css';
+import AuthService from "../AuthHandler/auth.service";
 import App from "../../App";
 import { Link } from "react-router-dom";
 import Register from './Register'

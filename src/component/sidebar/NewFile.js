@@ -1,6 +1,6 @@
 // import React, { useState } from 'react'
-import '../CSS/NewFile.css'
-import UserService from '../authHandler/user.service';
+import '../Styles/NewFile.css'
+import UserService from '../AuthHandler/user.service';
 import { useRef } from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

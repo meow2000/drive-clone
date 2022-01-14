@@ -1,14 +1,14 @@
 import React from 'react';
-import '../CSS/FileItem.css';
-import UserService from '../authHandler/user.service';
+import '../Styles/FileItem.css';
+import UserService from '../AuthHandler/user.service';
 import fileDownload from 'js-file-download';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
-import '../CSS/ContextMenuComponent.css';
+import '../Styles/ContextMenuComponent.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { injectStyle } from "react-toastify/dist/inject-style";
-import PopupMsg from '../popup/PopupMsg';
+import PopupMsg from '../Popup/PopupMsg';
 
 
 // const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -145,7 +145,7 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
         <div>
             <PopupMsg isOpen={open} handleCloseForm={handleCloseForm} oid={id} />
             <div id='fileItem' className='fileItem' >
-                <a target="_blank" href download>
+                <a target="_blank" href="true" download>
                     <div className="fileItem--left">
                         <InsertDriveFileIcon />
                         <p>{caption}</p>

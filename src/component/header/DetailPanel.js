@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import "../CSS/DetailPanel.css"
-import authService from '../authHandler/auth.service';
+import "../Styles/DetailPanel.css"
+import authService from '../AuthHandler/auth.service';
 
 export default class DetailPanel extends Component {
 

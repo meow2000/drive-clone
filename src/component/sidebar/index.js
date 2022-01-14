@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import NewFile from "../sidebar/NewFile";
-import SidebarItem from "../sidebar/Item";
+import NewFile from "./NewFile";
+import SidebarItem from "./Item";
 // material UI
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ImportantDevicesIcon from '@material-ui/icons/ImportantDevices';
@@ -10,7 +10,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import StorageIcon from '@material-ui/icons/Storage';
 // css file
-import '../CSS/Sidebar.css';
+import '../Styles/Sidebar.css';
 
 export default class index extends Component {
 

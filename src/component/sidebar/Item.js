@@ -1,9 +1,9 @@
 //import {Label} from '@material-ui/icons'
 import React from 'react'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import '../CSS/SidebarItem.css';
+import '../Styles/SidebarItem.css';
 // import FileView from '../file/FileView';
-import UserService from '../authHandler/user.service';
+import UserService from '../AuthHandler/user.service';
 // import { AirlineSeatIndividualSuiteSharp } from '@mui/icons-material';
 
 const SideBarItem = ({ arrow, icon, label, option, setFile }) => {

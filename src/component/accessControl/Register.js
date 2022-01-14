@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 
-import AuthService from "../authHandler/auth.service";
+import AuthService from "../AuthHandler/auth.service";
 import Login from './Login';
-import '../CSS/Login.css';
+import '../Styles/Login.css';
 
 class Register extends Component {
 
