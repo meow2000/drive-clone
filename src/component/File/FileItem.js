@@ -1,15 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import '../CSS/FileItem.css';
 import UserService from '../authHandler/user.service';
 import fileDownload from 'js-file-download';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
 import '../CSS/ContextMenuComponent.css';
-import Popup from '../popup/Popup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { injectStyle } from "react-toastify/dist/inject-style";
+import PopupMsg from '../popup/PopupMsg';
 
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-const FileItem = ({ id, caption, timestamp, size }) => {
+// const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const FileItem = ({ id, caption, timestamp, size, setFile }) => {
+    if (typeof window !== "undefined") {
+        injectStyle();
+    }
+
     const formatDate = (timestamp) => {
         const options = { year: "numeric", month: "long", day: "numeric" }
         return new Date(timestamp).toLocaleDateString(undefined, options)
@@ -34,30 +42,54 @@ const FileItem = ({ id, caption, timestamp, size }) => {
         UserService.downloadFile(caption).then(response => {
             console.log(response);
             fileDownload(response.data, caption);
-            // debugger
-            // const type = response.headers['content-type'];
-            // const blob = new Blob([response.data], { type: type, encoding: 'UTF-8' });
-            // const link = document.createElement('a');
-            // link.href = window.URL.createObjectURL(blob);
-            // link.download = caption;
-            // link.click()
         });
+    }
+
+    const deleteStar = () => {
+        fetch('http://localhost:8080/user/unstar?oid=' + id, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('user')}`
+            },
+        }).then(() => {
+            UserService.listStar().then(res => {
+                setFile(res);
+            })
+        })
+    }
+
+    const addStar = () => {
+        fetch('http://localhost:8080/user/star?oid=' + id, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('user')}`
+            },
+        }).then(res => {
+            console.log(res);
+        })
+        // UserService.addStar(id).then(res => {
+        //     console.log(res);
+        // })
     }
 
     const DeleteFile = () => {
         // event.preventDefault();
         UserService.deleteFile(id).then(response => {
-
             console.log(response);
-            window.location.reload();
+            UserService.getListFile().then(res => {
+                toast.dark('Đã xóa thành công', {
+                    toastId: 'delete-success',
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                });
+                setFile(res);
+            })
         });
     }
-
-    const ShareFile = () => {
-        this.DlgPopup.show();
-    }
-
-    const myRef = useRef();
 
     const menuItems = [
         {
@@ -74,38 +106,46 @@ const FileItem = ({ id, caption, timestamp, size }) => {
             text: 'Tải tệp lên'
         },
         {
+            text: 'Thêm sao'
+        },
+        {
+            text: 'Xóa sao'
+        },
+        {
             separator: true
         },
         {
             text: 'Ứng dụng khác'
         }
     ];
-    const [toggled, setToggled] = useState(false);
-    const handleToggle = () => {
-        setToggled(!toggled)
-    }
-
     const select = (args) => {
         if (args.item.text === 'Tải xuống') {
-            alert("Tải rồi");
             DownloadFile();
         } else if (args.item.text === 'Xoá') {
             DeleteFile();
         } else if (args.item.text === 'Chia sẻ tệp') {
-            // DlgPopup.show();
-            handleToggle();
+            handleOpenForm();
+        } else if (args.item.text === 'Thêm sao') {
+            addStar();
+        } else if (args.item.text === 'Xóa sao') {
+            deleteStar();
         }
     };
 
-    var userNameShare = null;
-    const HandleShare = () => {
-        console.log(userNameShare);
+    const [open, setOpen] = React.useState(false);
+    const handleOpenForm = () => {
+        setOpen(true);
+    }
+
+    const handleCloseForm = () => {
+        setOpen(false);
     }
 
     return (
         <div>
+            <PopupMsg isOpen={open} handleCloseForm={handleCloseForm} oid={id} />
             <div id='fileItem' className='fileItem' >
-                <a target="_blank" download>
+                <a target="_blank" href download>
                     <div className="fileItem--left">
                         <InsertDriveFileIcon />
                         <p>{caption}</p>
@@ -118,11 +158,6 @@ const FileItem = ({ id, caption, timestamp, size }) => {
                 </a>
                 <ContextMenuComponent target="#fileItem" items={menuItems} select={select} />
             </div>
-            {toggled && <div className="RandomPopup" id="randomPopup" ref={myRef}>
-                <input type="text" id="userName" value={userNameShare} />
-                <button className='m-random-btn' onClick={HandleShare}>Submit</button>
-            </div>}
-            <Popup/>
         </div>
     )
 }

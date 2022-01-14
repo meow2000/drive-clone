@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
+import { Routes, Route } from "react-router-dom";
 
 import './App.css';
 import Header from './component/header';
@@ -8,11 +7,11 @@ import Sidebar from './component/sidebar';
 import FileView from './component/file/FileView';
 // import SideIcons from './component/sideIcons';
 import UserService from "./component/authHandler/user.service";
-import Menu from './component/App/Menu';
 import Login from './component/accessControl/Login'
 import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "./component/authHandler/auth.service";
 import Register from "./component/accessControl/Register";
+import { ToastContainer } from "react-toastify";
 
 // import { Container } from "react-bootstrap";
 class App extends Component {
@@ -32,6 +31,7 @@ class App extends Component {
     var fileList = [];
     fileList = await UserService.getListFile();
     if (user) {
+      UserService.getUserInfo();
       this.setState({
         fileList: fileList,
         currentUser: user
@@ -40,6 +40,7 @@ class App extends Component {
   }
 
   FileHandler(file) {
+    UserService.getUserInfo();
     this.setState({
       fileList: file
     });
@@ -54,8 +55,9 @@ class App extends Component {
             <>
               <Header />
               <div className="app__main">
+                <ToastContainer />
                 <Sidebar FileHandler={this.FileHandler}/>
-                <FileView fileList={fileList} />
+                <FileView fileList={fileList} FileHandler={this.FileHandler} />
                 {/* <SideIcons /> */}
                 {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
               </div>

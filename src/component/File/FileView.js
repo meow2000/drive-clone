@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import '../CSS/FilesView.css';
-import { ContextMenuComponent } from '@syncfusion/ej2-react-navigations';
-
 import FileItem from './FileItem'
-import FileCard from './FileCard'
-import FileDownload from '../fileDownload/FileDownload';
+// import FileCard from './FileCard'
 import '../CSS/ContextMenuComponent.css';
 
 export default class FileView extends Component {
@@ -16,9 +13,23 @@ export default class FileView extends Component {
             item: [],
             reload: false
         };
+        this.setFileForApp = this.setFileForApp.bind(this);
+        this.setFileForComponent = this.setFileForComponent.bind(this);
     }
-    // const[files, setFiles] = useState(props.fileList.data);
-    // const items = [];
+    setFileForComponent(file) {
+        this.setState({
+            fileList: file
+        });
+        this.setFileForApp(file)
+    }
+
+    setFileForApp(file) {
+        console.log(file)
+        this.props.FileHandler(file);
+    }
+
+
+
     refreshPage = () => {
         this.setState(
             { reload: true },
@@ -65,13 +76,14 @@ export default class FileView extends Component {
                             <p>File size</p>
                         </div>
                     </div>
-                    {
-                        // <FileItem/>
-                        files.map(item => (
-                            <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} />
-                        ))
-                    }
-                    {/* <ContextMenuComponent target="#fileItem" items={menuItems} /> */}
+                    <div className="fileItem-wrapper">
+                        {
+                            // <FileItem/>
+                            files.map(item => (
+                                <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} setFile={this.setFileForComponent} />
+                            ))
+                        }
+                    </div>
                 </div >
             </div >
         )

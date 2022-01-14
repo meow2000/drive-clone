@@ -23,3 +23,7 @@
     list-style: none;
     box-shadow: 0 0 20px 0 #ccc;
 }
+
+#loader {
+  width: 300px;
+}

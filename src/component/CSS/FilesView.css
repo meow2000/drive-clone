@@ -21,7 +21,7 @@
 
 .header__folderTree {
     margin: 5px;
-    font-family: Google Sans, Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-family: Google Sans, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-variant-ligatures: no-contextual;
     font-size: 18px;
@@ -65,4 +65,29 @@
 
 .fileView__titles--right>p {
     padding-left: 20px;
+}
+
+.fileItem-wrapper {
+    overflow-y: auto;
+    height: 500px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

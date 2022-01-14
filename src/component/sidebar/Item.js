@@ -4,21 +4,31 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import '../CSS/SidebarItem.css';
 // import FileView from '../file/FileView';
 import UserService from '../authHandler/user.service';
-import { AirlineSeatIndividualSuiteSharp } from '@mui/icons-material';
+// import { AirlineSeatIndividualSuiteSharp } from '@mui/icons-material';
 
 const SideBarItem = ({ arrow, icon, label, option, setFile }) => {
 
     const _setFile = () => {
-        if(option === "shareFile") {
+        if (option === "shareFile") {
             UserService.listFileShare().then(res => {
-                setFile(res);            
+                setFile(res);
             });
-        } else if(option === "myFile") {
+        } else if (option === "myFile") {
             UserService.getListFile().then(res => {
                 setFile(res);
             })
-        } else if(option === "bin") {
+        } else if (option === "bin") {
             UserService.listFileBin().then(res => {
+                setFile(res);
+            })
+        } else if (option === "recent") {
+            UserService.listRecent().then(res => {
+                if (res.data) {
+                    setFile(res);
+                }
+            })
+        } else if (option === "star") {
+            UserService.listStar().then(res => {
                 setFile(res);
             })
         }
@@ -27,7 +37,7 @@ const SideBarItem = ({ arrow, icon, label, option, setFile }) => {
     return (
         <div className="sideBar__itemContainer" onClick={_setFile}>
             <div className="sidebar__arrow">
-                {arrow && (<ArrowRightIcon/>)}
+                {arrow && (<ArrowRightIcon />)}
             </div>
 
             <div className="sidebar__item">

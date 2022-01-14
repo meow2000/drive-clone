@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import '../CSS/NewFile.css'
 import UserService from '../authHandler/user.service';
 import { useRef } from 'react'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const NewFile = ({setFile}) => {
+const NewFile = ({ setFile }) => {
     // handle upload file
     const fileInputRef = useRef();
-
-    const [open, setOpen] = useState(false);
-    // const [file, setFile] = useState([]);
-    const [uploading, setUploading] = useState(false)
-
     const onFileChangeHandler = (event) => {
         event.preventDefault();
         var file;
@@ -25,6 +22,16 @@ const NewFile = ({setFile}) => {
                 console.log(res.data);
                 UserService.getListFile().then(res => {
                     setFile(res);
+                    toast('Đã tải xong 1 mục lên', {
+                        toastId: 'upload-success',
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                    });
                 })
             })
         // setUploading(false)
@@ -57,6 +64,7 @@ const NewFile = ({setFile}) => {
                 {/* <input type="file" className="form-control" name="file" onChange={onFileChangeHandler}/> */}
                 <input onChange={onFileChangeHandler} multiple={false} ref={fileInputRef} type="file" hidden name="file" />
             </div>
+
         </div>
     )
 }

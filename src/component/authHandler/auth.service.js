@@ -10,7 +10,7 @@ class AuthService {
                 password
             });
         if (response.data.data) {
-            localStorage.setItem("user", JSON.stringify(response.data.data));
+            localStorage.setItem("user", response.data.data);
         }
 
         return response.data.data;
@@ -29,7 +29,7 @@ class AuthService {
     }
 
     getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));
+        return localStorage.getItem('user');
     }
 }
 

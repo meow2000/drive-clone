@@ -21,7 +21,7 @@ export default class index extends Component {
             fileList: ""
         }
         // this.setFileShareList = this.setFileShareList.bind(this);
-        this.setMyFileList = this.setMyFileList.bind(this);
+        this.setFileForComponent = this.setFileForComponent.bind(this);
         this.setFileForApp = this.setFileForApp.bind(this);
         // this.setBinFileList = this.setBinFileList.bind(this);
     }
@@ -33,7 +33,7 @@ export default class index extends Component {
     //     this.setFileForApp(file)
     // }
 
-    setMyFileList(file) {
+    setFileForComponent(file) {
         this.setState({
             fileList: file
         });
@@ -56,14 +56,14 @@ export default class index extends Component {
     render() {
         return (
             <div className="sideBar">
-                <NewFile setFile={this.setMyFileList}/>
+                <NewFile setFile={this.setFileForComponent}/>
                 <div className="sideBar__container">
-                    <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setMyFileList} />
+                    <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setFileForComponent} />
                     <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
-                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setMyFileList} />
-                    <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} />
-                    <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} />
-                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setMyFileList}/>
+                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setFileForComponent} />
+                    <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} option={"recent"} setFile={this.setFileForComponent} />
+                    <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} option={"star"} setFile={this.setFileForComponent} />
+                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setFileForComponent}/>
 
                     <hr />
 
