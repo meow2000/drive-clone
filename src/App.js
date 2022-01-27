@@ -28,6 +28,7 @@ class App extends Component {
 
   async componentDidMount() {
     const user = AuthService.getCurrentUser();
+    UserService.getUserInfo();
     if (user) {
       var fileList = [];
       fileList = await UserService.getListFile();
@@ -40,7 +41,7 @@ class App extends Component {
   }
 
   FileHandler(file) {
-    UserService.getUserInfo();
+    // UserService.getUserInfo();
     this.setState({
       fileList: file
     });
@@ -52,16 +53,20 @@ class App extends Component {
       <div className="App">
         {
           currentUser ? (
-            <>
-              <Header />
-              <div className="app__main">
-                <ToastContainer />
-                <Sidebar FileHandler={this.FileHandler} />
-                <FileView fileList={fileList} FileHandler={this.FileHandler} />
-                {/* <SideIcons /> */}
-                {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
-              </div>
-            </>
+            localStorage.getItem('role') === 'USER' ? (
+              <>
+                <Header />
+                <div className="app__main">
+                  <ToastContainer />
+                  <Sidebar FileHandler={this.FileHandler} />
+                  <FileView fileList={fileList} FileHandler={this.FileHandler} />
+                  {/* <SideIcons /> */}
+                  {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
+                </div>
+              </>
+            ) : (
+                <Header />
+              )
           ) : (
             <>
               <div className="auth-wrapper">

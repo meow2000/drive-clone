@@ -70,6 +70,7 @@ class UserService {
         localStorage.setItem("email", res.data.email);
         localStorage.setItem("used", res.data.storage);
         localStorage.setItem("storage", res.data.plan.max_storage);
+        localStorage.setItem("role", res.data.role);
       })
     })
   }
