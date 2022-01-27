@@ -35,6 +35,7 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
     };
     const DownloadFile = () => {
         // event.preventDefault();
+        debugger
         console.log(caption);
         const formData = new FormData();
         formData.append('fileName', caption);
@@ -103,9 +104,6 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
             text: 'Xoá'
         },
         {
-            text: 'Tải tệp lên'
-        },
-        {
             text: 'Thêm sao'
         },
         {
@@ -140,24 +138,26 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
     const handleCloseForm = () => {
         setOpen(false);
     }
-
+    let str = "#" + id;
     return (
         <div>
             <PopupMsg isOpen={open} handleCloseForm={handleCloseForm} oid={id} />
-            <div id='fileItem' className='fileItem' >
-                <a target="_blank" href="true" download>
-                    <div className="fileItem--left">
-                        <InsertDriveFileIcon />
-                        <p>{caption}</p>
-                    </div>
-                    <div className="fileItem--right">
-                        <p>me</p>
-                        <p>{fileDate}</p>
-                        <p>{getReadableFileSizeString(size)}</p>
-                    </div>
-                </a>
-                <ContextMenuComponent target="#fileItem" items={menuItems} select={select} />
+            <div id="target">
+                <div id={id} className='fileItem' >
+                    <a target="_blank" href="true" onClick={(e) => { e.preventDefault() }}>
+                        <div className="fileItem--left">
+                            <InsertDriveFileIcon />
+                            <p>{caption}</p>
+                        </div>
+                        <div className="fileItem--right">
+                            <p>me</p>
+                            <p>{fileDate}</p>
+                            <p>{getReadableFileSizeString(size)}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
+            <ContextMenuComponent target={str} items={menuItems} select={select}/>
         </div>
     )
 }

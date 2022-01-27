@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "./component/AuthHandler/auth.service";
 import Register from "./component/AccessControl/Register";
 import { ToastContainer } from "react-toastify";
+import UserTable from "./component/UserManage/UserTable"
 
 // import { Container } from "react-bootstrap";
 class App extends Component {
@@ -65,8 +66,11 @@ class App extends Component {
                 </div>
               </>
             ) : (
+              <>
                 <Header />
-              )
+                <UserTable />
+              </>
+            )
           ) : (
             <>
               <div className="auth-wrapper">

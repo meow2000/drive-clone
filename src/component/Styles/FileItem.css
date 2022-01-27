@@ -1,4 +1,4 @@
-.fileItem{
+.fileItem {
     height: 55px;
     border-bottom: 1px solid rgb(219, 219, 219);
     border-top: 1px solid rgb(219, 219, 219);
@@ -7,26 +7,37 @@
     cursor: pointer;
 }
 
+.link-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
 .fileItem:hover {
     background-color: #eee;
 }
-.fileItem>a{
+
+.fileItem>a {
     height: 100%;
     display: flex;
     text-decoration: none;
     color: rgb(85, 78, 78);
 }
 
-.fileItem>a>div{
+.fileItem>a>div {
     display: flex;
     align-items: center;
 }
 
-.fileItem>a>div>*{
+.fileItem>a>div>* {
     margin: 10px;
 }
 
-.fileItem--left{
+.fileItem--left {
     flex: 1;
 }
 
@@ -35,12 +46,12 @@
 }
 
 .RandomPopup {
-  width: 200px;
-  height: 100px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  background-color: #eee;
-  align-items: center;
-  display: block;
+    width: 200px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: #eee;
+    align-items: center;
+    display: block;
 }
