@@ -30,3 +30,7 @@ body {
     background-color: rgb(49, 94, 179);
     transform: scale(1.1);
 }
+
+.admin-table-content {
+    padding: 16px;
+}

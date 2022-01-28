@@ -24,8 +24,52 @@ class App extends Component {
       currentUser: null,
       isLogin: false
     };
+    this.events = [
+      "load",
+      "mousemove",
+      "mousedown",
+      "click",
+      "scroll",
+      "keypress"
+    ];
+    this.logout = this.logout.bind(this);
+    this.resetTimeout = this.resetTimeout.bind(this);
     this.FileHandler = this.FileHandler.bind(this)
+
+    for (var i in this.events) {
+      window.addEventListener(this.events[i], this.resetTimeout);
+    }
+
+    this.setTimeout();
   }
+
+  clearTimeout() {
+    if (this.logoutTimeout) clearTimeout(this.logoutTimeout);
+  }
+
+  setTimeout() {
+    this.logoutTimeout = setTimeout(this.logout, 15 * 60 * 1000);
+  }
+
+  resetTimeout() {
+    this.clearTimeout();
+    this.setTimeout();
+  }
+
+  logout() {
+    // Send a logout request to the API
+    AuthService.logout();
+    // this.destroy(); // Cleanup
+  }
+
+  destroy() {
+    this.clearTimeout();
+
+    for (var i in this.events) {
+      window.removeEventListener(this.events[i], this.resetTimeout);
+    }
+  }
+
 
   async componentDidMount() {
     const user = AuthService.getCurrentUser();
@@ -48,6 +92,7 @@ class App extends Component {
     });
   }
 
+
   render() {
     const { currentUser, fileList } = this.state;
     return (
@@ -68,7 +113,11 @@ class App extends Component {
             ) : (
               <>
                 <Header />
-                <UserTable />
+                <div className="admin-table-content">
+                  <div className="container mt-3">
+                    <UserTable />
+                  </div>
+                </div>
               </>
             )
           ) : (

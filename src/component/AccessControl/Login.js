@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import '../Styles/Login.css';
 import AuthService from "../AuthHandler/auth.service";
-import App from "../../App";
 import { Link } from "react-router-dom";
 import Register from './Register'
 
@@ -38,7 +37,7 @@ export default class Login extends Component {
         AuthService
             .login(this.state.username, this.state.password)
             .then((res) => {
-                <App />
+                
                 window.location.reload();
             })
         // let navigate = useNavigate();
