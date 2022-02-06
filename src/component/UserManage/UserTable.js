@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../Styles/Table.css'
 import { Table } from "react-bootstrap";
 import AdminService from "../AuthHandler/admin.service";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,6 +14,7 @@ export default class UserTable extends Component {
         }
         this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
         this.searchTitle = this.searchTitle.bind(this);
+        this.setData = this.setData.bind(this);
     }
 
     componentDidMount() {
@@ -23,11 +25,6 @@ export default class UserTable extends Component {
             })).then(res => {
                 this.setState({ user_data: res.data })
                 console.log(this.state.user_data)
-                // localStorage.setItem("userName", res.data.name);
-                // localStorage.setItem("email", res.data.email);
-                // localStorage.setItem("used", res.data.storage);
-                // localStorage.setItem("storage", res.data.plan.max_storage);
-                // localStorage.setItem("role", res.data.role);
             })
         })
     }
@@ -38,6 +35,10 @@ export default class UserTable extends Component {
         this.setState({
             searchTitle: searchTitle
         });
+    }
+
+    setData(data) {
+        this.setState({user_data: data})
     }
 
     searchTitle() {
@@ -84,7 +85,7 @@ export default class UserTable extends Component {
                         </thead>
                         <tbody>
                             {user_data.map((user, index) => (
-                                <UserTableRows obj={user} key={index} plan_name={user.plan.name} plan_max_storage={user.plan.max_storage} cost={user.plan.cost}/>
+                                <UserTableRows obj={user} key={index} plan_name={user.plan.name} plan_max_storage={user.plan.max_storage} cost={user.plan.cost} setData={this.setData}/>
                                 // <tr key={user.id}>
                                 //     <td>{user.name}</td>
                                 //     <td>{user.enabled.toString()}</td>
