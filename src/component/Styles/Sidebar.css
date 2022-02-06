@@ -1,4 +1,4 @@
-.sideBar{
+.sideBar {
     max-width: 394px;
     min-width: 256px;
     height: 100vh;
@@ -7,7 +7,7 @@
     padding-right: 5px;
 }
 
-hr{
+hr {
     background-color: rgb(197, 197, 197);
     height: 1px;
     border: none;
@@ -15,4 +15,11 @@ hr{
 
 .sideBar__container {
     border-right: 1px solid transparent;
+}
+
+.active {
+    font-weight: 600;
+    color: #1967d2;
+    border-radius: 32px;
+    background-color: #e8f0fe;
 }

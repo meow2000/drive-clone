@@ -8,7 +8,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import StorageIcon from '@material-ui/icons/Storage';
+// import StorageIcon from '@material-ui/icons/Storage';
 // css file
 import '../Styles/Sidebar.css';
 
@@ -18,12 +18,13 @@ export default class index extends Component {
         super(props);
 
         this.state = {
-            fileList: ""
+            fileList: "",
+            activeIndex: 0
         }
         // this.setFileShareList = this.setFileShareList.bind(this);
         this.setFileForComponent = this.setFileForComponent.bind(this);
         this.setFileForApp = this.setFileForApp.bind(this);
-        // this.setBinFileList = this.setBinFileList.bind(this);
+        this.setLocation = this.setLocation.bind(this);
     }
 
     // setBinFileList(file) {
@@ -32,6 +33,11 @@ export default class index extends Component {
     //     });
     //     this.setFileForApp(file)
     // }
+
+
+    toggleClass(index, e) {
+        this.setState({ activeIndex: index });
+    };
 
     setFileForComponent(file) {
         this.setState({
@@ -52,22 +58,38 @@ export default class index extends Component {
         this.props.FileHandler(file);
     }
 
+    setLocation(location) {
+        this.props.setLocation(location)
+    }
 
     render() {
         return (
             <div className="sideBar">
-                <NewFile setFile={this.setFileForComponent}/>
+                <NewFile setFile={this.setFileForComponent} />
                 <div className="sideBar__container">
-                    <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setFileForComponent} />
-                    <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
-                    <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setFileForComponent} />
-                    <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} option={"recent"} setFile={this.setFileForComponent} />
-                    <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} option={"star"} setFile={this.setFileForComponent} />
-                    <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setFileForComponent}/>
+                    <div className={this.state.activeIndex===0 ? 'active': null}  onClick={this.toggleClass.bind(this, 0)}>
+                        <SidebarItem arrow icon={(<InsertDriveFileIcon />)} label={'My Drive'} option={"myFile"} setFile={this.setFileForComponent} setLocation={this.setLocation} />
+                    </div>
+                    <div>
+                        <SidebarItem arrow icon={(<ImportantDevicesIcon />)} label={'Computers'} />
+                    </div>
+                    <div className={this.state.activeIndex===1 ? 'active': null}  onClick={this.toggleClass.bind(this, 1)}>
+                        <SidebarItem icon={(<PeopleAltIcon />)} label={'Shared with me'} option={"shareFile"} setFile={this.setFileForComponent} setLocation={this.setLocation} />
+                    </div>
+                    <div className={this.state.activeIndex===2 ? 'active': null}  onClick={this.toggleClass.bind(this, 2)}>
+                        <SidebarItem icon={(<QueryBuilderIcon />)} label={'Recent'} option={"recent"} setFile={this.setFileForComponent} setLocation={this.setLocation} />
+
+                    </div>
+                    <div className={this.state.activeIndex===3 ? 'active': null}  onClick={this.toggleClass.bind(this, 3)}>
+                        <SidebarItem icon={(<StarBorderIcon />)} label={'Starred'} option={"star"} setFile={this.setFileForComponent} setLocation={this.setLocation} />
+                    </div>
+                    <div className={this.state.activeIndex===4 ? 'active': null}  onClick={this.toggleClass.bind(this, 4)}>
+                        <SidebarItem icon={(<DeleteOutlineIcon />)} label={'Bin'} option={"bin"} setFile={this.setFileForComponent} setLocation={this.setLocation} />
+                    </div>
 
                     <hr />
 
-                    <SidebarItem icon={(<StorageIcon />)} label={'Storage'} />
+                    {/* <SidebarItem icon={(<StorageIcon />)} label={'Storage'} /> */}
 
                 </div>
             </div>

@@ -13,7 +13,7 @@ class AuthService {
             localStorage.setItem("user", response.data.data);
         }
 
-        return response.data.data;
+        return response;
     }
 
     logout() {

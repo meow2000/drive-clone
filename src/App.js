@@ -20,9 +20,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      fileList: null,
+      fileList: [],
       currentUser: null,
-      isLogin: false
+      isLogin: false,
+      location: 'My Drive'
     };
     this.events = [
       "load",
@@ -35,11 +36,12 @@ class App extends Component {
     this.logout = this.logout.bind(this);
     this.resetTimeout = this.resetTimeout.bind(this);
     this.FileHandler = this.FileHandler.bind(this)
+    this.setLogin = this.setLogin.bind(this)
+    this.setLocation = this.setLocation.bind(this)
 
     for (var i in this.events) {
       window.addEventListener(this.events[i], this.resetTimeout);
     }
-
     this.setTimeout();
   }
 
@@ -59,6 +61,9 @@ class App extends Component {
   logout() {
     // Send a logout request to the API
     AuthService.logout();
+    this.setState({
+      isLogin: false
+    })
     // this.destroy(); // Cleanup
   }
 
@@ -70,21 +75,6 @@ class App extends Component {
     }
   }
 
-
-  async componentDidMount() {
-    const user = AuthService.getCurrentUser();
-    UserService.getUserInfo();
-    if (user) {
-      var fileList = [];
-      fileList = await UserService.getListFile();
-      UserService.getUserInfo();
-      this.setState({
-        fileList: fileList,
-        currentUser: user
-      });
-    }
-  }
-
   FileHandler(file) {
     // UserService.getUserInfo();
     this.setState({
@@ -92,20 +82,40 @@ class App extends Component {
     });
   }
 
+  async setLogin() {
+    const user = AuthService.getCurrentUser();
+    await UserService.getUserInfo();
+    if (user) {
+      var fileList = [];
+      fileList = await UserService.getListFile();
+      this.setState({
+        fileList: fileList,
+        currentUser: user,
+        isLogin: true
+      });
+    }
+  }
+
+  setLocation(location) {
+    this.setState({
+      location: location
+    })
+  }
+
 
   render() {
-    const { currentUser, fileList } = this.state;
+    const { location, fileList, isLogin } = this.state;
     return (
       <div className="App">
         {
-          currentUser ? (
+          localStorage.getItem('user') ? (
             localStorage.getItem('role') === 'USER' ? (
               <>
                 <Header />
                 <div className="app__main">
                   <ToastContainer />
-                  <Sidebar FileHandler={this.FileHandler} />
-                  <FileView fileList={fileList} FileHandler={this.FileHandler} />
+                  <Sidebar FileHandler={this.FileHandler} setLocation={this.setLocation} />
+                  <FileView location={location} fileList={fileList} FileHandler={this.FileHandler} />
                   {/* <SideIcons /> */}
                   {/* <ContextMenuComponent target="#fileItem" items={this.menuItems} /> */}
                 </div>
@@ -126,8 +136,8 @@ class App extends Component {
                 <div className="auth-inner">
                   <Routes>
                     {/* <Route path="/" element={<App />} /> */}
-                    <Route index element={<Login />} />
-                    <Route path="/sign-in" element={<Login />} />
+                    <Route index element={<Login setLogin={this.setLogin} isLogin={isLogin} />} />
+                    <Route path="/sign-in" element={<Login setLogin={this.setLogin} isLogin={isLogin} />} />
                     <Route path="/sign-up" element={<Register />} />
                   </Routes>
                 </div>

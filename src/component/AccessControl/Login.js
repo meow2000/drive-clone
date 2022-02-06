@@ -37,10 +37,10 @@ export default class Login extends Component {
         AuthService
             .login(this.state.username, this.state.password)
             .then((res) => {
-                window.location.reload();
+                if (res.status === 200) {
+                    this.props.setLogin()
+                }
             })
-        // let navigate = useNavigate();
-        // navigate("/");
     }
 
     RedirectToSignUp() {
@@ -88,11 +88,11 @@ export default class Login extends Component {
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Sign in</button>
-                
+
                 <p className="forgot-password text-right">
                     DON'T HAVE AN ACCOUNT ? <Link to='/sign-up' element={<Register />}>SIGN UP</Link>
                 </p>
-                
+
             </form>
         );
     }
