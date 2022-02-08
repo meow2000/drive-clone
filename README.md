@@ -11,3 +11,6 @@ In the project directory, you can run:
 # Clone and run spring back-end with
 
 https://github.com/datlt132/GGDriveClone
+
+login: user
+password: hedspi2a
