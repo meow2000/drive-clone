@@ -23,8 +23,7 @@ export default class UserTable extends Component {
                 data: data,
                 status: response.status
             })).then(res => {
-                this.setState({ user_data: res.data })
-                console.log(this.state.user_data)
+                this.setState({user_data: res.data})
             })
         })
     }
@@ -38,11 +37,13 @@ export default class UserTable extends Component {
     }
 
     setData(data) {
-        this.setState({user_data: data})
+        this.setState({ user_data: data })
     }
 
     searchTitle() {
-        
+        AdminService.searchTitle(this.state.searchTitle).then(res => {
+            this.setState({user_data: res.data.data})
+        })
     }
 
     render() {
@@ -83,25 +84,14 @@ export default class UserTable extends Component {
 
                             </tr>
                         </thead>
-                        <tbody>
-                            {user_data.map((user, index) => (
-                                <UserTableRows obj={user} key={index} plan_name={user.plan.name} plan_max_storage={user.plan.max_storage} cost={user.plan.cost} setData={this.setData}/>
-                                // <tr key={user.id}>
-                                //     <td>{user.name}</td>
-                                //     <td>{user.enabled.toString()}</td>
-                                //     <td>{user.role}</td>
-                                //     <td>{user.plan.name}</td>
-                                //     <td>{user.plan.max_storage}Kb</td>
-                                //     <td>{user.plan.cost}</td>
-                                //     <td>
-                                //         <ButtonGroup>
-                                //             <Button variant="primary">Edit</Button>{' '}
-                                //             <Button variant="danger">Delete</Button>
-                                //         </ButtonGroup>
-                                //     </td>
-                                // </tr>
-                            ))}
-                        </tbody>
+                        {
+                            user_data &&
+                            <tbody>
+                                {user_data.map((user, index) => (
+                                    <UserTableRows obj={user} key={index} plan_name={user.plan.name} plan_max_storage={user.plan.max_storage} cost={user.plan.cost} setData={this.setData} />
+                                ))}
+                            </tbody>
+                        }
                     </Table>
                 </div>
             </div>

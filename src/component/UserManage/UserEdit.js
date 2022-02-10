@@ -34,7 +34,6 @@ function UserEdit({ isOpen, handleCloseForm, id, setData }) {
                         pauseOnHover: false,
                         draggable: false,
                     });
-                    debugger
                     setData(res.data)
                 })
             })

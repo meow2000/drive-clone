@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HelpOutlineIcon from '@mui/icons-material/Help';
 import SettingsIcon from '@mui/icons-material/Settings';
 // import AppsIcon from '@mui/icons-material/Apps';
 import "../Styles/Header.css";
 import DetailPanel from './DetailPanel';
-
+import SearchPanel from './SearchPanel'
 export default class index extends Component {
 
     constructor(props) {
@@ -29,13 +27,7 @@ export default class index extends Component {
                     <img src="//ssl.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png" alt="logo__image" />
                     <span>Drive</span>
                 </div>
-                <div className="header__searchContainer">
-                    <div className="header__searchBar">
-                        <SearchIcon />
-                        <input type="text" placeholder="Tìm trong Drive" />
-                        <ExpandMoreIcon />
-                    </div>
-                </div>
+                <SearchPanel FileHandler={this.props.FileHandler}/>
                 <div className="header__icons">
                     <span>
                         <HelpOutlineIcon />

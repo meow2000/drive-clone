@@ -13,7 +13,7 @@ import PopupMsg from '../Popup/PopupMsg';
 
 // const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-const FileItem = ({ id, caption, timestamp, size, setFile }) => {
+const FileItem = ({ id, caption, timestamp, size, setFile, location }) => {
     if (typeof window !== "undefined") {
         injectStyle();
     }
@@ -74,22 +74,39 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
     }
 
     const DeleteFile = () => {
-        // event.preventDefault();
-        UserService.deleteFile(id).then(response => {
-            console.log(response);
-            UserService.getListFile().then(res => {
-                toast.dark('Đã xóa thành công', {
-                    toastId: 'delete-success',
-                    position: "bottom-left",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: false,
-                });
-                setFile(res);
-            })
-        });
+        if (location === 'Bin') {
+            UserService.completeDeleteFile(id).then(response => {
+                console.log(response);
+                UserService.getListFile().then(res => {
+                    toast.dark('Đã xóa hoàn toàn file', {
+                        toastId: 'delete-success',
+                        position: "bottom-left",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                    });
+                    setFile(res);
+                })
+            });
+        } else {
+            UserService.deleteFile(id).then(response => {
+                console.log(response);
+                UserService.getListFile().then(res => {
+                    toast.dark('Đã xóa thành công', {
+                        toastId: 'delete-success',
+                        position: "bottom-left",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                    });
+                    setFile(res);
+                })
+            });
+        }
     }
 
     const menuItems = [
@@ -157,7 +174,7 @@ const FileItem = ({ id, caption, timestamp, size, setFile }) => {
                     </a>
                 </div>
             </div>
-            <ContextMenuComponent target={str} items={menuItems} select={select}/>
+            <ContextMenuComponent target={str} items={menuItems} select={select} />
         </div>
     )
 }

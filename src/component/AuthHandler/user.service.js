@@ -37,6 +37,9 @@ class UserService {
     return axios.delete(API_URL + 'deleteFile', { headers: authHeader(), params: { oid: oid } });
   }
 
+  completeDeleteFile(oid) {
+    return axios.delete(API_URL + 'completedDelete', { headers: authHeader(), params: { oid: oid } });
+  }
 
   listFileShare() {
     return axios.get(API_URL + "shareWithMe", { headers: authHeader() });
@@ -74,6 +77,11 @@ class UserService {
       })
     })
   }
+
+  searchFile(keyword) {
+    return axios.get(API_URL + "search", { headers: authHeader(), params: {keyword: keyword} })
+  }
+
 }
 
 export default new UserService();

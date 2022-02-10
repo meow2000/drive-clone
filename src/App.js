@@ -111,7 +111,7 @@ class App extends Component {
           localStorage.getItem('user') ? (
             localStorage.getItem('role') === 'USER' ? (
               <>
-                <Header />
+                <Header FileHandler={this.FileHandler} />
                 <div className="app__main">
                   <ToastContainer />
                   <Sidebar FileHandler={this.FileHandler} setLocation={this.setLocation} />

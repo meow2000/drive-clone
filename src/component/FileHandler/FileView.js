@@ -57,24 +57,10 @@ export default class FileView extends Component {
                     </div>
                     <div className="fileView__header__right-container"></div>
                 </div>
-                {/* <div className="fileView__row">
-                {
-                    <FileCard />
-                    files.slice(0, 5).map(({ id, item }) => (
-                        <FileCard name={item.caption} />
-                    ))
-
-                }
-                <div>
-                    Chi tiết file được chọn và download button
-                    <FileDownload />
-                </div>
-            </div> */}
                 <div className="content-wrapper" >
                     {files ?
                         (
                             <>
-
                                 <div className="fileView__titles">
                                     <div className="fileView__titles--left">
                                         <p>Name</p>
@@ -89,7 +75,7 @@ export default class FileView extends Component {
                                     {
                                         // <FileItem/>
                                         files.map(item => (
-                                            <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} setFile={this.setFileForComponent} />
+                                            <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} setFile={this.setFileForComponent} location={this.props.location} />
                                         ))
                                     }
                                 </div>
