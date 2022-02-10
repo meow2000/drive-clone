@@ -78,7 +78,7 @@ export default class UserTable extends Component {
                                 <th>Enable</th>
                                 <th>Role</th>
                                 <th>Plan</th>
-                                <th>max storage</th>
+                                {/* <th>max storage</th> */}
                                 <th>Cost</th>
                                 <th></th>
 
@@ -88,7 +88,7 @@ export default class UserTable extends Component {
                             user_data &&
                             <tbody>
                                 {user_data.map((user, index) => (
-                                    <UserTableRows obj={user} key={index} plan_name={user.plan.name} plan_max_storage={user.plan.max_storage} cost={user.plan.cost} setData={this.setData} />
+                                    <UserTableRows obj={user} key={index} plan_name={user.plan.name} cost={user.plan.cost} setData={this.setData} />
                                 ))}
                             </tbody>
                         }

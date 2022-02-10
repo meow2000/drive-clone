@@ -21,7 +21,6 @@ const UserTableRows = (props) => {
             <td>{enabled.toString()}</td>
             <td>{role}</td>
             <td>{props.plan_name}</td>
-            <td>{props.plan_max_storage}Kb</td>
             <td>{props.cost}</td>
             <td className="button-group">
                 <ButtonGroup>

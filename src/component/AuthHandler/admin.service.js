@@ -30,7 +30,7 @@ class AdminService {
         return axios.get(API_URL + 'search', {headers: authHeader(), params: {keyword: keyword}} )
     }
 
-    changePlan(uid, pid) {
+    changePlan(pid, uid) {
         return fetch(API_URL + 'plan?pid=' + pid + '&id=' + uid, {
             method: 'PUT',
             headers: {

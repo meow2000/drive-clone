@@ -17,6 +17,7 @@ function UserEdit({ isOpen, handleCloseForm, id, setData }) {
 
     const handleForm = async () => {
         if (planId) {
+            debugger
             await AdminService.changePlan(planId, id).then(res => {
                 console.log(res)
             })

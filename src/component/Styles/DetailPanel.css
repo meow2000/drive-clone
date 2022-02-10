@@ -33,8 +33,11 @@
 .detail-panel__header__img {
     width: 80px;
     height: 80px;
-    background-color: red;
+    background-image: url('../../avatar-default.png');
+    background-repeat: none;
     border-radius: 50%;
+    background-position: center;
+    background-size: contain;
 }
 
 .detail-panel__header__name {
