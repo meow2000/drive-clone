@@ -43,7 +43,7 @@ function ConfirmDelete(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>Delete this user ?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                {/* <Modal.Body>Are you sure ?</Modal.Body> */}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
