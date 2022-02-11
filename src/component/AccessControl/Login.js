@@ -60,7 +60,7 @@ export default class Login extends Component {
                 <div className="m-form__header__title">Sign in</div>
 
                 <div className="form-group">
-                    <label>Email address</label>
+                    <label>Username</label>
                     <input
                         type="text"
                         className="form-control"

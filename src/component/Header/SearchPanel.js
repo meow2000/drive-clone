@@ -20,7 +20,9 @@ function SearchPanel(props) {
     return (
         <div className="header__searchContainer">
             <div className="header__searchBar">
-                <SearchIcon onClick={handleSearch}/>
+                <div className="m-search-btn">
+                    <SearchIcon onClick={handleSearch} />
+                </div>
                 <input
                     type="text" placeholder="Tìm trong Drive"
                     name="keyword"
