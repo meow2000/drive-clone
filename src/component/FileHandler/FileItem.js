@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import '../Styles/FileItem.css';
 import UserService from '../AuthHandler/user.service';
 import fileDownload from 'js-file-download';
@@ -9,13 +9,25 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { injectStyle } from "react-toastify/dist/inject-style";
 import PopupMsg from '../Popup/PopupMsg';
+import userService from '../AuthHandler/user.service';
 
 
 // const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-const FileItem = ({ id, caption, timestamp, size, setFile, location }) => {
+const FileItem = ({ id, caption, timestamp, size, setFile, location, uid }) => {
     if (typeof window !== "undefined") {
         injectStyle();
+    }
+
+    const [Username, setUsername] = useState('');
+
+    const initializedRef = useRef(false);
+    if (!initializedRef.current) {
+        initializedRef.current = true;
+        // Do some stuff
+        userService.getUsername(uid).then(res => {
+            setUsername(res.data)
+        })
     }
 
     const formatDate = (timestamp) => {
@@ -162,15 +174,13 @@ const FileItem = ({ id, caption, timestamp, size, setFile, location }) => {
             <div id="target">
                 <div id={id} className='fileItem' >
                     <a target="_blank" href="true" onClick={(e) => { e.preventDefault() }}>
-                        <div className="fileItem--left">
+                        <div className="col-7">
                             <InsertDriveFileIcon />
                             <p>{caption}</p>
                         </div>
-                        <div className="fileItem--right">
-                            <p>me</p>
-                            <p>{fileDate}</p>
-                            <p>{getReadableFileSizeString(size)}</p>
-                        </div>
+                        <div className='col ms-4'>{Username}</div>
+                        <div className='col'>{fileDate}</div>
+                        <div className='col'>{getReadableFileSizeString(size)}</div>
                     </a>
                 </div>
             </div>

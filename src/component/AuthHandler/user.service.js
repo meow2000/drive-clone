@@ -86,6 +86,10 @@ class UserService {
     return axios.get(API_URL + "search", { headers: authHeader(), params: { keyword: keyword } })
   }
 
+  getUsername(uid) {
+    return axios.get(API_URL + "getUsername", { headers: authHeader(), params: { uid: uid } })
+  }
+
 }
 
 export default new UserService();

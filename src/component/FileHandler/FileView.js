@@ -7,13 +7,6 @@ export default class FileView extends Component {
     constructor(props) {
         super(props);
 
-        // if (!props.fileList) {
-        //     debugger
-        //     UserService.getListFile().then().then(res=> {
-        //         fileList = res.data
-        //     })
-        // }
-
         this.state = {
             files: props.fileList.data,
             item: [],
@@ -33,8 +26,6 @@ export default class FileView extends Component {
         console.log(file)
         this.props.FileHandler(file);
     }
-
-
 
     refreshPage = () => {
         this.setState(
@@ -61,21 +52,19 @@ export default class FileView extends Component {
                     {files ?
                         (
                             <>
-                                <div className="fileView__titles">
-                                    <div className="fileView__titles--left">
-                                        <p>Name</p>
-                                    </div>
-                                    <div className="fileView__titles--right">
-                                        <p>File owner</p>
-                                        <p>Last modified</p>
-                                        <p>File size</p>
-                                    </div>
+                                <div className="row fileView__row">
+                                    {/* <div className="fileView__titles--left">
+                                    </div> */}
+                                    <div className='col-7'>Name</div>
+                                    <div className='col'>File owner</div>
+                                    <div className='col'>Last modified</div>
+                                    <div className='col'>File size</div>
                                 </div>
                                 <div className="fileItem-wrapper">
                                     {
                                         // <FileItem/>
                                         files.map(item => (
-                                            <FileItem key={item.id} id={item.id} caption={item.name} timestamp={item.updatedTime} size={item.size} setFile={this.setFileForComponent} location={this.props.location} />
+                                            <FileItem key={item.id} id={item.id} uid={item.uid} caption={item.name} timestamp={item.updatedTime} size={item.size} setFile={this.setFileForComponent} location={this.props.location} />
                                         ))
                                     }
                                 </div>
