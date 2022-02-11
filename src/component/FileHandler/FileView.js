@@ -34,8 +34,12 @@ export default class FileView extends Component {
         )
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ files: nextProps.fileList.data });
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({ files: nextProps.fileList.data });
+    // }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return { files: nextProps.fileList.data };
     }
 
     render() {
