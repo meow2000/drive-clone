@@ -20,6 +20,18 @@ const NewFile = ({ setFile }) => {
         UserService.uploadFile(formData)
             .then(res => {
                 console.log(res.data);
+                if(res.data.message !== "Upload successful!\n") {
+                    toast(res.data.message, {
+                        toastId: 'upload-success',
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                    });
+                }
                 UserService.getListFile().then(res => {
                     setFile(res);
                     toast('Đã tải xong 1 mục lên', {
