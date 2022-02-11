@@ -5,6 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import "../Styles/Header.css";
 import DetailPanel from './DetailPanel';
 import SearchPanel from './SearchPanel'
+import userService from '../AuthHandler/user.service';
 export default class index extends Component {
 
     constructor(props) {
@@ -15,7 +16,10 @@ export default class index extends Component {
         this.SetDetailPanel = this.SetDetailPanel.bind(this);
     }
 
-    SetDetailPanel() {
+    async SetDetailPanel() {
+        await userService.getStorage().then(res => {
+            localStorage.setItem('used', res.data)
+        })
         this.setState({ toggleShow: !this.state.toggleShow });
     }
 

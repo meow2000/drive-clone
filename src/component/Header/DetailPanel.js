@@ -7,7 +7,7 @@ export default class DetailPanel extends Component {
     constructor(props) {
         super(props);
         this.SignOutOnClick = this.SignOutOnClick.bind(this);
-
+        this.getReadableFileSizeString = this.getReadableFileSizeString.bind(this);
         this.state = {
             userName: localStorage.getItem('userName'),
             used: localStorage.getItem('used'),
@@ -15,6 +15,16 @@ export default class DetailPanel extends Component {
         };
     }
 
+    getReadableFileSizeString(fileSizeInBytes) {
+        let i = -1;
+        const byteUnits = [' kB', ' MB', ' GB', ' TB', 'PB', 'EB', 'ZB', 'YB'];
+        do {
+            fileSizeInBytes = fileSizeInBytes / 1024;
+            i++;
+        } while (fileSizeInBytes > 1024);
+
+        return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
+    };
 
     SignOutOnClick() {
         authService.logout();
@@ -29,7 +39,7 @@ export default class DetailPanel extends Component {
                     <div className="detail-panel__header">
                         <div className="detail-panel__header__img"></div>
                         <div className="detail-panel__header__name"><b>{userName}</b></div>
-                        <div className="detail-panel__header__email">{used}/{storage}Kb</div>
+                        <div className="detail-panel__header__email">{this.getReadableFileSizeString(used)}/{this.getReadableFileSizeString(storage)}</div>
                     </div>
                     <div className="detail-panel__footer">
                         <div className="detail-panel__sign-out" onClick={this.SignOutOnClick}>Sign out of all accounts</div>

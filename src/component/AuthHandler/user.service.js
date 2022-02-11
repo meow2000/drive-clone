@@ -78,8 +78,12 @@ class UserService {
     })
   }
 
+  getStorage() {
+    return axios.get(API_URL + "getStorage", { headers: authHeader() });
+  }
+
   searchFile(keyword) {
-    return axios.get(API_URL + "search", { headers: authHeader(), params: {keyword: keyword} })
+    return axios.get(API_URL + "search", { headers: authHeader(), params: { keyword: keyword } })
   }
 
 }
