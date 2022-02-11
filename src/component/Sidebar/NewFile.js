@@ -20,7 +20,7 @@ const NewFile = ({ setFile }) => {
         UserService.uploadFile(formData)
             .then(res => {
                 console.log(res.data);
-                if(res.data.message !== "Upload successful!\n") {
+                if (res.data.message !== "Upload successful!\n") {
                     toast(res.data.message, {
                         toastId: 'upload-success',
                         position: "bottom-right",
@@ -31,42 +31,29 @@ const NewFile = ({ setFile }) => {
                         draggable: false,
                         progress: undefined,
                     });
+                } else {
+                    UserService.getListFile().then(res => {
+                        setFile(res);
+                        toast('Đã tải xong 1 mục lên', {
+                            toastId: 'upload-success',
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: false,
+                            draggable: false,
+                            progress: undefined,
+                        });
+                    })
                 }
-                UserService.getListFile().then(res => {
-                    setFile(res);
-                    toast('Đã tải xong 1 mục lên', {
-                        toastId: 'upload-success',
-                        position: "bottom-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: false,
-                        draggable: false,
-                        progress: undefined,
-                    });
-                })
             })
-        // setUploading(false)
-        // setOpen(false)
-        // setFile(null)
+        reset()
     };
 
-    // const onClickHandler = (e) => {
-    //     setOpen(true);
-    // }
-
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-
-    // const handleChange =(e) => {
-    //     e.preventDefault();
-    //     debugger
-    //     if(e.target.files[0]) {
-    //         setFile(e.target.files[0]);
-    //     }
-    // }
-    // ---------------------------------------------------
+    const reset = () => {
+        fileInputRef.current.value = "";
+    };
+    
     return (
         <div className="newFile">
             <div className="newFile__container" onClick={() => fileInputRef.current.click()}>

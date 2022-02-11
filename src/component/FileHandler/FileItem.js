@@ -67,6 +67,38 @@ const FileItem = ({ id, caption, timestamp, size, setFile, location, uid }) => {
         }).then(() => {
             UserService.listStar().then(res => {
                 setFile(res);
+                toast.dark('Đã xóa sao', {
+                    toastId: 'delete-star-success',
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                });
+                setFile(res);
+            })
+        })
+    }
+
+    const restoreFile = () => {
+        fetch('http://localhost:8080/user/undoDelete?oid=' + id, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('user')}`
+            },
+        }).then(() => {
+            UserService.listStar().then(res => {
+                setFile(res);
+                toast.success('khôi phục thành công', {
+                    toastId: 'restore-success',
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                });
             })
         })
     }
@@ -78,7 +110,15 @@ const FileItem = ({ id, caption, timestamp, size, setFile, location, uid }) => {
                 Authorization: `Bearer ${localStorage.getItem('user')}`
             },
         }).then(res => {
-            console.log(res);
+            toast.success('Đã thêm sao', {
+                toastId: 'add-star-success',
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+              });
         })
         // UserService.addStar(id).then(res => {
         //     console.log(res);
@@ -139,6 +179,9 @@ const FileItem = ({ id, caption, timestamp, size, setFile, location, uid }) => {
             text: 'Xóa sao'
         },
         {
+            text: 'Khôi phục'
+        },
+        {
             separator: true
         },
         {
@@ -156,6 +199,8 @@ const FileItem = ({ id, caption, timestamp, size, setFile, location, uid }) => {
             addStar();
         } else if (args.item.text === 'Xóa sao') {
             deleteStar();
+        } else if (args.item.text === 'Khôi phục') {
+            restoreFile();
         }
     };
 

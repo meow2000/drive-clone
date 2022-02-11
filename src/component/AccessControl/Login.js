@@ -37,8 +37,10 @@ export default class Login extends Component {
         AuthService
             .login(this.state.username, this.state.password)
             .then((res) => {
-                if (res.status === 200) {
+                if (res.data.status.code === 1000) {
                     this.props.setLogin()
+                } else {
+                    alert(res.data.status.message)
                 }
             })
     }
