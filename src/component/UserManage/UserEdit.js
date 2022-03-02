@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import AdminService from '../AuthHandler/admin.service';
@@ -8,6 +8,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { connect } from 'react-redux'
+import { updateTaskStart } from '../../redux/actions/Admin-action';
+
 function UserEdit({ isOpen, handleCloseForm, id, setData }) {
     const textFieldRef = useRef();
     const [planId, setPlan] = useState('');
@@ -18,9 +21,10 @@ function UserEdit({ isOpen, handleCloseForm, id, setData }) {
     const handleForm = async () => {
         if (planId) {
             debugger
-            await AdminService.changePlan(planId, id).then(res => {
-                console.log(res)
-            })
+            // await AdminService.changePlan(planId, id).then(res => {
+            //     console.log(res)
+            // })
+            updateTaskStart(planId, id);
             AdminService.getListUser().then((response) => {
                 response.json().then(data => ({
                     data: data,
@@ -66,5 +70,11 @@ function UserEdit({ isOpen, handleCloseForm, id, setData }) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    users: state.users
+})
+
+const connected = connect(mapStateToProps, { updateTaskStart })(UserEdit)
 
 export default UserEdit;

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import "../Styles/DetailPanel.css"
 import authService from '../AuthHandler/auth.service';
-
 export default class DetailPanel extends Component {
-
+    
     constructor(props) {
         super(props);
         this.SignOutOnClick = this.SignOutOnClick.bind(this);

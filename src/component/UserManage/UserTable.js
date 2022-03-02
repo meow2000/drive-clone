@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import '../Styles/Table.css'
 import { Table } from "react-bootstrap";
 import AdminService from "../AuthHandler/admin.service";
+// redux connect
+import { connect } from "react-redux";
+import { retrieveUsers } from "../../redux/actions/Admin-action";
+// import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { Button, ButtonGroup } from 'react-bootstrap';
 import UserTableRows from "./UserTableRows";
-export default class UserTable extends Component {
+class UserTable extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user_data: [],
-            searchTitle: ''
+            searchTitle: '',
         }
         this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
         this.searchTitle = this.searchTitle.bind(this);
@@ -18,19 +21,19 @@ export default class UserTable extends Component {
     }
 
     componentDidMount() {
-        AdminService.getListUser().then((response) => {
-            response.json().then(data => ({
-                data: data,
-                status: response.status
-            })).then(res => {
-                this.setState({user_data: res.data})
-            })
-        })
+        // AdminService.getListUser().then((response) => {
+        //     response.json().then(data => ({
+        //         data: data,
+        //         status: response.status
+        //     })).then(res => {
+        //         this.setState({ user_data: res.data })
+        //     })
+        // })
+        this.props.retrieveUsers();
     }
 
     onChangeSearchTitle(e) {
         const searchTitle = e.target.value;
-
         this.setState({
             searchTitle: searchTitle
         });
@@ -42,12 +45,13 @@ export default class UserTable extends Component {
 
     searchTitle() {
         AdminService.searchTitle(this.state.searchTitle).then(res => {
-            this.setState({user_data: res.data.data})
+            this.setState({ user_data: res.data.data })
         })
     }
 
     render() {
-        const { user_data, searchTitle } = this.state;
+        const { searchTitle } = this.state;
+        const { users } = this.props;
         return (
             <div className="list row">
                 <div className="col-md-8">
@@ -85,9 +89,9 @@ export default class UserTable extends Component {
                             </tr>
                         </thead>
                         {
-                            user_data &&
+                            users &&
                             <tbody>
-                                {user_data.map((user, index) => (
+                                {users.map((user, index) => (
                                     <UserTableRows obj={user} key={index} plan_name={user.plan.name} cost={user.plan.cost} setData={this.setData} />
                                 ))}
                             </tbody>
@@ -98,3 +102,11 @@ export default class UserTable extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.users.data,
+    };
+};
+
+export default connect(mapStateToProps, { retrieveUsers })(UserTable);

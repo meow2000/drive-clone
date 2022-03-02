@@ -12,6 +12,14 @@ class AdminService {
                 Authorization: `Bearer ${localStorage.getItem('user')}`
             },
         })
+        // AdminService.getListUser().then((response) => {
+        //     response.json().then(data => ({
+        //         data: data,
+        //         status: response.status
+        //     })).then(res => {
+        //         this.setState({ user_data: res.data })
+        //     })
+        // })
     }
 
     deleteUser(id) {
